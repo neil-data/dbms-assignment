@@ -1,6 +1,42 @@
 # Entity-Relationship (ER) Diagram — CEMS
 
-## 1. Relational ER Model Overview
+## 1. Classical Peter Chen E-R Diagram
+
+The diagram below follows the classic **Peter Chen Database Modeling Notation** (as taught in standard academic DBMS textbooks):
+- **Blue Rectangles**: Strong / Weak Entities (`DEPARTMENT`, `STUDENT`, `REGISTRATION`, `EVENT`, `VENUE`, `CATEGORY`, `ADMIN`)
+- **Red Diamonds**: Relationship sets (`enrolled_in`, `books`, `for_event`, `hosted_at`, `tagged_as`, `manages`)
+- **Green Ovals**: Entity Attributes
+- **Underlined Attribute Text**: **Primary Key (PK)** identifiers (e.g., <u>dept_id</u>, <u>student_id</u>, <u>reg_id</u>, <u>event_id</u>, <u>venue_id</u>, <u>category_id</u>, <u>admin_id</u>)
+- **Cardinality Ratios**: Displayed in red text (`1`, `1..*`, or `M:N`) indicating mapping constraints.
+
+![CEMS Peter Chen Classical ER Diagram](er_diagram_chen.png)
+
+> **Vector SVG Available**: [`docs/er_diagram_chen.svg`](er_diagram_chen.svg) (can be scaled without loss of resolution).
+
+---
+
+## 2. How to View / Generate ER Diagram in MySQL Workbench
+
+If your teacher or examiner asks you to show the live database diagram inside **MySQL Workbench**:
+
+1. Open **MySQL Workbench**.
+2. Connect to your local MySQL instance (Hostname: `127.0.0.1`, Port: `3306`, User: `root`).
+3. In the top navigation menu, click:
+   $$\text{\textbf{Database}} \longrightarrow \text{\textbf{Reverse Engineer...}} \quad (\text{Shortcut: } \mathbf{Ctrl + R})$$
+4. Select your stored MySQL connection and click **Next**.
+5. When prompted to select schemas, check **`cems_db`** and click **Next**.
+6. Select **"Import MySQL Table Objects"** and click **Execute**.
+7. Click **Finish**.
+8. MySQL Workbench will instantly render the visual **EER (Enhanced Entity-Relationship) Diagram Canvas** showing:
+   - All 7 tables: `department`, `student`, `registration`, `event`, `venue`, `category`, `event_category`, `admin`.
+   - Visual Crow's Foot connectors for every Foreign Key (`ON DELETE CASCADE`, `ON DELETE RESTRICT`).
+   - Indexes, primary keys (gold keys), and nullability flags.
+9. You can export this live diagram at any time:
+   $$\text{\textbf{File}} \longrightarrow \text{\textbf{Export}} \longrightarrow \text{\textbf{Export as PNG...} / \textbf{Export as PDF...}}$$
+
+---
+
+## 3. Relational ER Model Overview
 
 The College Event & Registration Management System (**CEMS**) is engineered around a normalized relational model satisfying **Third Normal Form (3NF)**.
 
