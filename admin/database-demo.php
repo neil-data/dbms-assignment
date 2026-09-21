@@ -27,7 +27,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DBMS Demonstration Console — CEMS</title>
+  <title>DBMS Demonstration Console â€” CEMS</title>
   <meta name="description" content="Academic DBMS live demonstration console for teacher evaluation, relational integrity testing, ACID transactions, and query benchmarks." />
   
   <link rel="stylesheet" href="../css/style.css" />
@@ -161,7 +161,6 @@ header('Content-Type: text/html; charset=UTF-8');
   <header class="cems-header scrolled">
     <div class="nav-container">
       <a href="../index.html" class="brand-logo">
-        <span class="brand-mark">C</span>
         <span class="brand-name">CEMS</span>
         <span class="brand-tag">DBMS Viva Console</span>
       </a>
