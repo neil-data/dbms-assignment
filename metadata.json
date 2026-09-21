@@ -1,0 +1,8 @@
+{
+  "name": "College Event & Registration Management System",
+  "description": "A database-driven college event and registration management system featuring public event discovery, student portal, and comprehensive admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
+

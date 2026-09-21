@@ -1,0 +1,150 @@
+/* ==========================================================================
+   CEMS RESPONSIVE STYLESHEET
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .preview-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-columns {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hero-section {
+    padding-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .hero-indicators {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .cat-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .schema-node-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .ticket-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cems-modal {
+    width: 92% !important;
+    max-width: 92% !important;
+    padding: 1.5rem !important;
+    margin: 1rem auto !important;
+    max-height: 88vh !important;
+    overflow-y: auto !important;
+  }
+
+  .cems-toast {
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: 1rem !important;
+    padding: 0.85rem 1.25rem !important;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .admin-metrics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .admin-tabs-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
+  }
+}
+

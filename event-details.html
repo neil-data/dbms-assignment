@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Specification — CEMS</title>
+  <meta name="description" content="View comprehensive event specifications, faculty coordinator contacts, venue details, and reserve your registration pass." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Atmospheric Glow -->
+  <div class="cinematic-background" style="height: 550px; min-height: 550px;" aria-hidden="true">
+    <div class="glow-nebula-gold" style="top: 15%; width: 750px; height: 350px;"></div>
+    <div class="glow-nebula-blue" style="top: 30%; width: 850px; height: 350px;"></div>
+    <div class="dust-particles"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="cems-header scrolled" id="cems-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+        <span class="brand-tag">Academic v2.4</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="index.html#workflow" class="nav-link">Workflow</a>
+        <a href="index.html#categories" class="nav-link">Categories</a>
+        <a href="index.html#architecture" class="nav-link">Architecture</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Injected via main.js -->
+        <a href="login.html" class="nav-auth-link">Sign In</a>
+        <a href="events.html" class="btn btn-primary btn-pill-arrow">
+          <span>Explore Events</span>
+          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 10; padding-top: calc(var(--header-height) + 2.5rem); min-height: 85vh; padding-bottom: 5rem;">
+    <div class="section-wrapper" style="padding-top: 1.5rem;" id="event-detail-view">
+      <!-- Injected dynamically via js/events.js -->
+      <div style="text-align: center; padding: 5rem 0;">
+        <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gold-primary); animation: spin 1s infinite linear;">sync</span>
+        <p style="color: var(--text-muted); margin-top: 1rem;">Querying relational event record...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 College Event &amp; Registration Management System.</div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Events Directory — CEMS</title>
+  <meta name="description" content="Discover and register for technical symposiums, hackathons, workshops, cultural galas, and athletic championships." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Ambience -->
+  <div class="cinematic-background" style="height: 480px; min-height: 480px;" aria-hidden="true">
+    <div class="glow-nebula-blue" style="top: 10%; width: 900px; height: 350px;"></div>
+    <div class="dust-particles"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="cems-header scrolled" id="cems-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+        <span class="brand-tag">Academic v2.4</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="events.html" class="nav-link active">Events</a>
+        <a href="index.html#workflow" class="nav-link">Workflow</a>
+        <a href="index.html#categories" class="nav-link">Categories</a>
+        <a href="index.html#architecture" class="nav-link">Architecture</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Injected via main.js -->
+        <a href="login.html" class="nav-auth-link">Sign In</a>
+        <a href="events.html" class="btn btn-primary btn-pill-arrow">
+          <span>Explore Events</span>
+          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 10; padding-top: calc(var(--header-height) + 2.5rem); min-height: 80vh;">
+    <div class="section-wrapper" style="padding-top: 2rem;">
+      
+      <!-- Page Header -->
+      <div style="margin-bottom: 3rem;">
+        <span class="section-eyebrow">CAMPUS EVENT REGISTRY</span>
+        <h1 class="section-title">Discover &amp; Register</h1>
+        <p class="section-subtitle">
+          Explore upcoming symposiums, workshops, and student tournaments. Reserve your seat with real-time DBMS quota tracking.
+        </p>
+      </div>
+
+      <!-- Filter and Search Bar -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2.5rem; backdrop-filter: blur(16px);">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 1rem; align-items: center;" class="filter-controls-grid">
+          
+          <!-- Search Input -->
+          <div style="position: relative;">
+            <span class="material-symbols-outlined" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 20px;">search</span>
+            <input 
+              type="text" 
+              id="event-search-input" 
+              placeholder="Search by event title, keyword, or venue..." 
+              style="width: 100%; background: rgba(2, 4, 9, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.65rem 1rem 0.65rem 2.75rem; color: var(--text-primary); font-size: 0.9rem; outline: none;"
+            />
+          </div>
+
+          <!-- Category Filter -->
+          <div>
+            <select id="category-filter-select" style="width: 100%; background: rgba(2, 4, 9, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.65rem 1rem; color: var(--text-primary); font-size: 0.88rem; outline: none; cursor: pointer;">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+
+          <!-- Status Filter -->
+          <div>
+            <select id="status-filter-select" style="width: 100%; background: rgba(2, 4, 9, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.65rem 1rem; color: var(--text-primary); font-size: 0.88rem; outline: none; cursor: pointer;">
+              <option value="all">All Statuses</option>
+              <option value="Open">Open</option>
+              <option value="Closing Soon">Closing Soon</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+
+          <!-- Sort Filter -->
+          <div>
+            <select id="sort-filter-select" style="width: 100%; background: rgba(2, 4, 9, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 0.65rem 1rem; color: var(--text-primary); font-size: 0.88rem; outline: none; cursor: pointer;">
+              <option value="date_asc">Date: Upcoming First</option>
+              <option value="date_desc">Date: Furthest First</option>
+              <option value="seats_left">Seats: Scarcity First</option>
+              <option value="title_asc">Title: Alphabetical</option>
+            </select>
+          </div>
+
+          <!-- Reset Button -->
+          <div>
+            <button id="reset-filters-btn" class="btn btn-ghost" style="font-size: 0.84rem; padding: 0.65rem 1rem;" title="Reset Filters">
+              <span class="material-symbols-outlined" style="font-size: 18px;">restart_alt</span>
+              <span>Reset</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Result count bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--text-muted);">
+          <span id="events-count-label">Loading catalog...</span>
+          <span>Database-driven institutional registry</span>
+        </div>
+      </div>
+
+      <!-- Events Cards Grid -->
+      <div class="events-grid" id="events-catalog-container">
+        <!-- Injected via js/events.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 College Event &amp; Registration Management System.</div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/events.js"></script>
+</body>
+</html>

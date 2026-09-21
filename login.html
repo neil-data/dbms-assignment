@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Authorization — CEMS</title>
+  <meta name="description" content="Sign in to your student event dashboard or administrative control console." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .auth-role-tabs {
+      display: flex;
+      background: rgba(2, 4, 9, 0.6);
+      padding: 0.35rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 2rem;
+    }
+    .auth-role-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: transparent;
+      border: none;
+    }
+    .auth-role-tab.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .auth-input-group {
+      margin-bottom: 1.35rem;
+      text-align: left;
+    }
+    .auth-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .auth-input {
+      width: 100%;
+      background: rgba(2, 4, 9, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .auth-input:focus {
+      border-color: var(--gold-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Atmospheric Glow -->
+  <div class="cinematic-background" style="height: 600px; min-height: 600px;" aria-hidden="true">
+    <div class="glow-nebula-gold" style="top: 20%; width: 700px; height: 350px;"></div>
+    <div class="glow-nebula-blue" style="top: 35%; width: 850px; height: 350px;"></div>
+    <div class="dust-particles"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="cems-header scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="events.html" class="nav-link">Events</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="register.html" class="btn btn-secondary" style="font-size: 0.84rem;">New Student Registration</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 10; min-height: 85vh; display: flex; align-items: center; justify-content: center; padding: calc(var(--header-height) + 2rem) 1.5rem 3rem;">
+    <div style="max-width: 460px; width: 100%; background: linear-gradient(180deg, rgba(16, 28, 58, 0.85) 0%, rgba(11, 19, 41, 0.95) 100%); border: 1px solid var(--border-highlight); border-radius: var(--radius-lg); padding: 2.75rem 2.25rem; box-shadow: 0 25px 60px rgba(0,0,0,0.7); backdrop-filter: blur(20px);">
+      
+      <!-- Card Header -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-eyebrow" style="font-size: 0.72rem; margin-bottom: 0.4rem;">CENTRAL PORTAL AUTHENTICATION</span>
+        <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--text-primary);">
+          Institutional Sign In
+        </h2>
+        <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 0.4rem;">
+          Access your enrolled event passes or administrative database.
+        </p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="auth-role-tabs">
+        <button type="button" class="auth-role-tab active" data-role="student">Student Portal</button>
+        <button type="button" class="auth-role-tab" data-role="admin">Admin Console</button>
+      </div>
+
+      <!-- Form -->
+      <form id="cems-login-form">
+        <div class="auth-input-group">
+          <label class="auth-label" for="login-email">Institutional Email</label>
+          <input type="email" id="login-email" class="auth-input" placeholder="student.name@campus.edu" required />
+        </div>
+
+        <div class="auth-input-group">
+          <label class="auth-label" for="login-password">Access Password</label>
+          <input type="password" id="login-password" class="auth-input" placeholder="••••••••••••" required />
+        </div>
+
+        <div id="admin-credential-notice" style="display: none; font-size: 0.76rem; color: var(--gold-primary); background: rgba(245, 207, 104, 0.08); border: 1px solid var(--border-gold); padding: 0.65rem 0.85rem; border-radius: 6px; margin-bottom: 1.25rem;">
+          Admin credentials authenticate against the internal <code>ADMIN</code> relational entity.
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 0.92rem; margin-top: 0.5rem; justify-content: center;">
+          <span>Authorize Access</span>
+          <span class="material-symbols-outlined" style="font-size: 18px;">login</span>
+        </button>
+      </form>
+
+      <!-- Status Notice -->
+      <div style="margin-top: 2rem; padding: 1rem; border-radius: var(--radius-sm); background: rgba(2, 4, 9, 0.5); border: 1px solid var(--border-subtle); text-align: center;">
+        <span style="font-size: 0.76rem; color: var(--text-muted); display: block;">
+          Database connection required to authenticate institutional records.
+        </span>
+      </div>
+
+      <!-- Registration link -->
+      <div style="text-align: center; margin-top: 1.75rem; font-size: 0.84rem; color: var(--text-secondary);">
+        New student without an account? 
+        <a href="register.html" style="color: var(--gold-primary); font-weight: 600;">Create Account</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 College Event &amp; Registration Management System.</div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

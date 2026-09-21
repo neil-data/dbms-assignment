@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Event & Registration Management System</title>
+  <meta name="description" content="A database-driven college event and registration management system featuring public event discovery, student portal, and comprehensive admin management." />
+  <meta property="og:title" content="College Event & Registration Management System" />
+  <meta property="og:description" content="A database-driven college event and registration management system featuring public event discovery, student portal, and comprehensive admin management." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- =========================================================================
+       CINEMATIC ATMOSPHERIC LIGHT TRAILS (PRIMARY SCREENSHOT RE-CREATION)
+       ========================================================================= -->
+  <div class="cinematic-background" aria-hidden="true">
+    <div class="glow-nebula-blue"></div>
+    <div class="glow-nebula-gold"></div>
+    <div class="dust-particles"></div>
+
+    <!-- Central Horizon Flare -->
+    <div class="horizon-flare"></div>
+    <div class="horizon-spark"></div>
+
+    <!-- Scalable Cinematic Fiber-Optic Trails -->
+    <svg class="light-trails-svg" viewBox="0 0 1920 1080" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gold Gradients -->
+        <linearGradient id="goldBeamLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f5cf68" stop-opacity="0" />
+          <stop offset="35%" stop-color="#f5cf68" stop-opacity="0.75" />
+          <stop offset="85%" stop-color="#fff4cc" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+        </linearGradient>
+
+        <linearGradient id="goldBeamRight" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#f5cf68" stop-opacity="0" />
+          <stop offset="35%" stop-color="#f5cf68" stop-opacity="0.75" />
+          <stop offset="85%" stop-color="#fff4cc" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+        </linearGradient>
+
+        <!-- Blue Gradients -->
+        <linearGradient id="blueBeamLeft" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0284c7" stop-opacity="0" />
+          <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.8" />
+          <stop offset="90%" stop-color="#bae6fd" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+        </linearGradient>
+
+        <linearGradient id="blueBeamRight" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#0284c7" stop-opacity="0" />
+          <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.8" />
+          <stop offset="90%" stop-color="#bae6fd" stop-opacity="1" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+        </linearGradient>
+
+        <!-- Soft Glow Filters -->
+        <filter id="glowGold" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="8" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <filter id="glowBlue" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="9" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- UPPER GOLDEN LIGHT TRAILS (Flowing inward from top left & right) -->
+      <g filter="url(#glowGold)">
+        <!-- Broad ambient glow ribbon -->
+        <path class="light-trail-gold" d="M -80 140 C 420 200, 720 460, 960 580" stroke="url(#goldBeamLeft)" stroke-width="10" stroke-linecap="round" stroke-dasharray="800 200" opacity="0.4" />
+        <path class="light-trail-gold" d="M 2000 140 C 1500 200, 1200 460, 960 580" stroke="url(#goldBeamRight)" stroke-width="10" stroke-linecap="round" stroke-dasharray="800 200" opacity="0.4" />
+
+        <!-- Sharp laser lines -->
+        <path class="light-trail-gold" d="M -50 180 C 450 250, 750 480, 960 580" stroke="url(#goldBeamLeft)" stroke-width="2.5" stroke-dasharray="600 300" />
+        <path class="light-trail-gold" d="M 1970 180 C 1470 250, 1170 480, 960 580" stroke="url(#goldBeamRight)" stroke-width="2.5" stroke-dasharray="600 300" />
+
+        <!-- Additional fine streaks -->
+        <path class="light-trail-gold" d="M -20 100 C 480 180, 780 430, 960 580" stroke="url(#goldBeamLeft)" stroke-width="1.2" opacity="0.8" />
+        <path class="light-trail-gold" d="M 1940 100 C 1440 180, 1140 430, 960 580" stroke="url(#goldBeamRight)" stroke-width="1.2" opacity="0.8" />
+      </g>
+
+      <!-- LOWER ELECTRIC CYAN/BLUE LIGHT TRAILS (Flowing inward from bottom left & right) -->
+      <g filter="url(#glowBlue)">
+        <!-- Broad ambient glow ribbon -->
+        <path class="light-trail-blue" d="M -80 980 C 420 900, 740 700, 960 580" stroke="url(#blueBeamLeft)" stroke-width="12" stroke-linecap="round" stroke-dasharray="900 250" opacity="0.45" />
+        <path class="light-trail-blue" d="M 2000 980 C 1500 900, 1180 700, 960 580" stroke="url(#blueBeamRight)" stroke-width="12" stroke-linecap="round" stroke-dasharray="900 250" opacity="0.45" />
+
+        <!-- Sharp laser lines -->
+        <path class="light-trail-blue" d="M -40 920 C 440 830, 760 670, 960 580" stroke="url(#blueBeamLeft)" stroke-width="2.8" stroke-dasharray="700 250" />
+        <path class="light-trail-blue" d="M 1960 920 C 1480 830, 1160 670, 960 580" stroke="url(#blueBeamRight)" stroke-width="2.8" stroke-dasharray="700 250" />
+
+        <!-- Additional fine streaks -->
+        <path class="light-trail-blue" d="M -10 1040 C 460 940, 770 720, 960 580" stroke="url(#blueBeamLeft)" stroke-width="1.4" opacity="0.85" />
+        <path class="light-trail-blue" d="M 1930 1040 C 1460 940, 1150 720, 960 580" stroke="url(#blueBeamRight)" stroke-width="1.4" opacity="0.85" />
+      </g>
+    </svg>
+
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- =========================================================================
+       NAVIGATION HEADER
+       ========================================================================= -->
+  <header class="cems-header" id="cems-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" id="header-brand-link">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+        <span class="brand-tag">Academic v2.4</span>
+      </a>
+
+      <nav class="nav-links" id="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="#workflow" class="nav-link">Workflow</a>
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+      </nav>
+
+      <div class="nav-actions" id="header-nav-actions">
+        <!-- Injected dynamically via main.js -->
+        <a href="login.html" class="nav-auth-link">Sign In</a>
+        <a href="events.html" class="btn btn-primary btn-pill-arrow">
+          <span>Explore Events</span>
+          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO SECTION (PRIMARY REFERENCE BENCHMARK)
+       ========================================================================= -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <!-- Editorial Eyebrow -->
+        <div class="hero-eyebrow" id="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>COLLEGE EVENT MANAGEMENT SYSTEM</span>
+        </div>
+
+        <!-- Grand Centered Typography -->
+        <h1 class="hero-title" id="hero-heading">
+          <span class="title-line">Discover. Register.</span>
+          <span class="title-line accent-glow">Experience Campus.</span>
+        </h1>
+
+        <!-- High-contrast Subtitle -->
+        <p class="hero-subtitle" id="hero-desc">
+          One intelligent platform for discovering college events, managing registrations, and tracking student participation across every academic discipline.
+        </p>
+
+        <!-- Call to Action Buttons -->
+        <div class="hero-cta-group" id="hero-actions">
+          <a href="events.html" class="btn btn-primary btn-pill-arrow" id="hero-primary-btn">
+            <span>Explore Events</span>
+            <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary" id="hero-secondary-btn">
+            <span>Student Portal</span>
+          </a>
+        </div>
+
+        <!-- Horizontal Feature Indicators (Matching Reference Screenshot) -->
+        <div class="hero-indicators" id="hero-indicators-bar">
+          <div class="indicator-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
+            <span>EVENT DISCOVERY</span>
+          </div>
+          <div class="indicator-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
+            <span>REAL-TIME REGISTRATION</span>
+          </div>
+          <div class="indicator-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
+            <span>CAMPUS PARTICIPATION</span>
+          </div>
+        </div>
+
+        <div class="hero-footer-caption">
+          Trusted by academic departments, faculty coordinators &amp; student bodies. 2026
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FEATURED EVENTS SHOWCASE (EDITORIAL CARDS)
+         ======================================================================= -->
+    <section class="section-wrapper" id="featured-events-section">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-eyebrow">CURATED CALENDAR</span>
+          <h2 class="section-title">Flagship Campus Events</h2>
+          <p class="section-subtitle">High-impact engineering symposiums, creative showcases, and national championships.</p>
+        </div>
+        <div>
+          <a href="events.html" class="btn btn-secondary">
+            <span>View All Events</span>
+            <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="events-grid" id="featured-events-container">
+        <!-- Rendered dynamically by js/main.js -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         EVENT CATEGORIES (MINIMALIST INTERACTIVE ROWS)
+         ======================================================================= -->
+    <section class="section-wrapper" id="categories">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-eyebrow">DISCIPLINES & TRACKS</span>
+          <h2 class="section-title">Browse by Category</h2>
+          <p class="section-subtitle">Structured across academic, competitive, and extracurricular domains.</p>
+        </div>
+      </div>
+
+      <div class="category-rows" id="categories-container">
+        <!-- Rendered dynamically by js/main.js -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         HOW IT WORKS (WORKFLOW SEQUENCE)
+         ======================================================================= -->
+    <section class="section-wrapper" id="workflow">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-eyebrow">SYSTEM WORKFLOW</span>
+          <h2 class="section-title">Seamless 3-Step Experience</h2>
+          <p class="section-subtitle">Engineered for instantaneous verification and zero friction.</p>
+        </div>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-step">
+          <div class="step-header">
+            <span class="step-num">01</span>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined">search</span>
+            </div>
+          </div>
+          <h3 class="step-title">Discover</h3>
+          <p class="step-desc">
+            Explore curated event listings filtered by academic department, venue capacity, schedule constraints, and category tracks.
+          </p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="step-header">
+            <span class="step-num">02</span>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined">how_to_reg</span>
+            </div>
+          </div>
+          <h3 class="step-title">Register</h3>
+          <p class="step-desc">
+            Instantly reserve your seat with single-click institutional authorization. Real-time DBMS quota synchronization prevents overbooking.
+          </p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="step-header">
+            <span class="step-num">03</span>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined">qr_code_scanner</span>
+            </div>
+          </div>
+          <h3 class="step-title">Participate</h3>
+          <p class="step-desc">
+            Access your cryptographic digital gate pass with verification QR codes, track attendance history, and build your co-curricular record.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         DBMS ARCHITECTURE & PLATFORM PREVIEW
+         ======================================================================= -->
+    <section class="section-wrapper" id="architecture">
+      <div class="preview-container">
+        <div class="preview-top-bar">
+          <div class="window-dots">
+            <span class="window-dot" style="background:#ef4444;"></span>
+            <span class="window-dot" style="background:#f59e0b;"></span>
+            <span class="window-dot" style="background:#10b981;"></span>
+          </div>
+          <span class="window-title">CEMS Relational Core • Schema &amp; Storage Architecture</span>
+          <span style="color:var(--gold-primary);font-size:0.8rem;font-family:var(--font-display);">3NF Compliant</span>
+        </div>
+
+        <div class="preview-split">
+          <div>
+            <span class="section-eyebrow">RELATIONAL ENTITY RELATIONSHIP</span>
+            <h3 style="font-family:var(--font-display);font-size:1.75rem;margin-bottom:1rem;color:var(--text-primary);">
+              Institutional Data Integrity
+            </h3>
+            <p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.65;margin-bottom:1.5rem;">
+              Built on relational normalization standards, CEMS enforces foreign key constraints across Departments, Venues, Students, Events, and Registrations.
+            </p>
+
+            <div class="sql-snippet">
+              <span class="keyword">SELECT</span> e.title, v.venue_name, <span class="func">COUNT</span>(r.registration_id) <span class="keyword">AS</span> enrolled,<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.max_capacity - <span class="func">COUNT</span>(r.registration_id)) <span class="keyword">AS</span> seats_available<br/>
+              <span class="keyword">FROM</span> <span class="table">EVENT</span> e<br/>
+              <span class="keyword">JOIN</span> <span class="table">VENUE</span> v <span class="keyword">ON</span> e.venue_id = v.venue_id<br/>
+              <span class="keyword">LEFT JOIN</span> <span class="table">REGISTRATION</span> r <span class="keyword">ON</span> e.event_id = r.event_id <span class="keyword">AND</span> r.status = <span class="table">'Confirmed'</span><br/>
+              <span class="keyword">GROUP BY</span> e.event_id<br/>
+              <span class="keyword">ORDER BY</span> enrolled <span class="keyword">DESC</span>;
+            </div>
+          </div>
+
+          <div class="schema-diagram">
+            <div class="schema-node-grid">
+              <div class="schema-node highlight">
+                <div class="node-title">
+                  <span class="material-symbols-outlined" style="font-size:16px;">school</span>
+                  <span>DEPARTMENT</span>
+                </div>
+                <div class="node-fields">
+                  PK: dept_id<br/>
+                  dept_name, code, head
+                </div>
+              </div>
+
+              <div class="schema-node highlight">
+                <div class="node-title">
+                  <span class="material-symbols-outlined" style="font-size:16px;">badge</span>
+                  <span>STUDENT</span>
+                </div>
+                <div class="node-fields">
+                  PK: student_id<br/>
+                  FK: dept_id (DEPARTMENT)<br/>
+                  name, email, semester
+                </div>
+              </div>
+
+              <div class="schema-node highlight">
+                <div class="node-title">
+                  <span class="material-symbols-outlined" style="font-size:16px;">meeting_room</span>
+                  <span>VENUE</span>
+                </div>
+                <div class="node-fields">
+                  PK: venue_id<br/>
+                  venue_name, location, capacity
+                </div>
+              </div>
+
+              <div class="schema-node highlight">
+                <div class="node-title">
+                  <span class="material-symbols-outlined" style="font-size:16px;">confirmation_number</span>
+                  <span>REGISTRATION</span>
+                </div>
+                <div class="node-fields">
+                  PK: registration_id<br/>
+                  FK: student_id, event_id<br/>
+                  status, ticket_token
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align:center;padding-top:0.5rem;">
+              <a href="admin.html" class="btn btn-secondary" style="font-size:0.84rem;">
+                <span class="material-symbols-outlined" style="font-size:18px;">database</span>
+                <span>Open Relational Admin Console</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom:0.75rem;">
+            <span class="brand-mark">C</span>
+            <span class="brand-name">CEMS</span>
+          </div>
+          <p class="footer-desc">
+            Academic DBMS Project: College Event &amp; Registration Management System. Engineered for enterprise-grade performance, responsive delivery, and relational rigor.
+          </p>
+        </div>
+
+        <div class="footer-columns">
+          <div>
+            <h4 class="footer-col-title">Navigation</h4>
+            <div class="footer-links">
+              <a href="index.html" class="footer-link">Home</a>
+              <a href="events.html" class="footer-link">All Events</a>
+              <a href="#workflow" class="footer-link">System Workflow</a>
+              <a href="#categories" class="footer-link">Event Categories</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Portals</h4>
+            <div class="footer-links">
+              <a href="student-dashboard.html" class="footer-link">Student Portal</a>
+              <a href="admin.html" class="footer-link">Admin Console</a>
+              <a href="login.html" class="footer-link">Sign In</a>
+              <a href="register.html" class="footer-link">Student Registration</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Architecture</h4>
+            <div class="footer-links">
+              <span class="footer-link" style="cursor:default;">3NF Normalized</span>
+              <span class="footer-link" style="cursor:default;">Foreign Key Rules</span>
+              <span class="footer-link" style="cursor:default;">ACID Transactions</span>
+              <span class="footer-link" style="cursor:default;">PHP / MySQL Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 College Event &amp; Registration Management System. Academic Portfolio Project.
+        </div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal — CEMS</title>
+  <meta name="description" content="View your enrolled event passes, gate verification QR codes, and campus participation history." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Ambience -->
+  <div class="cinematic-background" style="height: 500px; min-height: 500px;" aria-hidden="true">
+    <div class="glow-nebula-blue" style="top: 15%; width: 850px; height: 350px;"></div>
+    <div class="glow-nebula-gold" style="top: 25%; width: 650px; height: 300px;"></div>
+    <div class="dust-particles"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="cems-header scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+        <span class="brand-tag">Student Portal</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="events.html" class="nav-link">Explore Events</a>
+        <a href="student-dashboard.html" class="nav-link active">My Passes</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Injected via main.js -->
+        <a href="events.html" class="btn btn-primary btn-pill-arrow">
+          <span>Find Events</span>
+          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 10; padding-top: calc(var(--header-height) + 2rem); min-height: 85vh; padding-bottom: 5rem;">
+    <div class="section-wrapper" style="padding-top: 1.5rem;" id="student-dashboard-content">
+      <div style="text-align: center; padding: 4rem 0;">
+        <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gold-primary); animation: spin 1s infinite linear;">sync</span>
+        <p style="color: var(--text-muted); margin-top: 1rem;">Loading student portal...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 College Event &amp; Registration Management System.</div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

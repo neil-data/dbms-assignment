@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrative Console — CEMS DBMS</title>
+  <meta name="description" content="Central relational database management console for academic departments, venues, events, and student registrations." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Ambience -->
+  <div class="cinematic-background" style="height: 500px; min-height: 500px;" aria-hidden="true">
+    <div class="glow-nebula-gold" style="top: 15%; width: 850px; height: 350px;"></div>
+    <div class="dust-particles"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="cems-header scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">CEMS</span>
+        <span class="brand-tag">Admin Console</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="events.html" class="nav-link">Public Catalog</a>
+        <a href="admin.html" class="nav-link active">Admin Console</a>
+        <a href="admin/database-demo.php" class="nav-link" style="color:var(--gold-primary);">DBMS Demo</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Injected via main.js -->
+        <a href="events.html" class="btn btn-secondary" style="font-size: 0.84rem;">View Public Catalog</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position: relative; z-index: 10; padding-top: calc(var(--header-height) + 2rem); min-height: 85vh; padding-bottom: 5rem;">
+    <div class="section-wrapper" style="padding-top: 1.5rem;" id="admin-console-content">
+      <div style="text-align: center; padding: 4rem 0;">
+        <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gold-primary); animation: spin 1s infinite linear;">sync</span>
+        <p style="color: var(--text-muted); margin-top: 1rem;">Connecting to CEMS DBMS relational layer...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cems-footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 College Event &amp; Registration Management System. Relational Data Architecture.</div>
+        <div class="system-status-indicator">
+          <span class="status-beacon"></span>
+          <span>Database: Not Connected</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
