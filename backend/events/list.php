@@ -2,7 +2,7 @@
 /**
  * CEMS - List Events Catalog Endpoint
  * GET /backend/events/list.php
- * Supports Search, Category Filter, Status Filter, and Sorting.
+ * Supports Search, Category Filter, Club Filter, Status Filter, and Sorting.
  */
 
 declare(strict_types=1);
@@ -16,11 +16,12 @@ try {
 
     $search   = trim($_GET['search'] ?? '');
     $category = trim($_GET['category'] ?? 'all');
+    $club     = trim($_GET['club'] ?? 'all');
     $status   = trim($_GET['status'] ?? 'all');
     $sort     = trim($_GET['sort'] ?? 'date_asc');
     $featured = isset($_GET['featured']) && $_GET['featured'] === '1';
 
-    // Base query joining EVENT with VENUE and aggregating confirmed REGISTRATION count
+    // Base query joining EVENT with VENUE, CLUB, and aggregating confirmed REGISTRATION count
     $sql = '
         SELECT 
             e.event_id,
@@ -38,10 +39,16 @@ try {
             v.venue_name,
             v.location AS venue_location,
             v.capacity AS venue_capacity,
+            cl.club_id,
+            cl.club_name,
+            cl.slug AS club_slug,
+            cl.category AS club_category,
+            cl.logo_icon AS club_logo_icon,
             COUNT(CASE WHEN r.status = "CONFIRMED" THEN 1 END) AS registered_count,
             GREATEST(0, e.max_capacity - COUNT(CASE WHEN r.status = "CONFIRMED" THEN 1 END)) AS available_seats
         FROM event e
         INNER JOIN venue v ON e.venue_id = v.venue_id
+        LEFT JOIN club cl ON e.club_id = cl.club_id
         LEFT JOIN registration r ON e.event_id = r.event_id
     ';
 
@@ -50,8 +57,9 @@ try {
 
     // Search filter
     if (!empty($search)) {
-        $whereClauses[] = '(e.event_name LIKE ? OR e.description LIKE ? OR v.venue_name LIKE ?)';
+        $whereClauses[] = '(e.event_name LIKE ? OR e.description LIKE ? OR v.venue_name LIKE ? OR cl.club_name LIKE ?)';
         $searchParam = '%' . $search . '%';
+        $params[] = $searchParam;
         $params[] = $searchParam;
         $params[] = $searchParam;
         $params[] = $searchParam;
@@ -69,25 +77,24 @@ try {
         $params[] = $category;
     }
 
+    // Club filter
+    if (!empty($club) && $club !== 'all') {
+        $whereClauses[] = '(cl.slug = ? OR cl.club_id = ?)';
+        $params[] = $club;
+        $params[] = $club;
+    }
+
     // Status filter
     if (!empty($status) && $status !== 'all') {
-        if ($status === 'Open' || $status === 'UPCOMING') {
-            $whereClauses[] = 'e.status = "UPCOMING"';
-        } elseif ($status === 'Closing Soon' || $status === 'ONGOING') {
-            $whereClauses[] = 'e.status = "ONGOING"';
-        } elseif ($status === 'Closed' || $status === 'COMPLETED' || $status === 'CANCELLED') {
-            $whereClauses[] = 'e.status IN ("COMPLETED", "CANCELLED")';
-        } else {
-            $whereClauses[] = 'e.status = ?';
-            $params[] = $status;
-        }
+        $whereClauses[] = 'e.status = ?';
+        $params[] = strtoupper($status);
     }
 
     if (!empty($whereClauses)) {
         $sql .= ' WHERE ' . implode(' AND ', $whereClauses);
     }
 
-    $sql .= ' GROUP BY e.event_id, e.event_name, e.description, e.event_date, e.event_time, e.max_capacity, e.status, v.venue_id, v.venue_name, v.location, v.capacity';
+    $sql .= ' GROUP BY e.event_id, e.event_name, e.description, e.event_date, e.event_time, e.max_capacity, e.status, v.venue_id, v.venue_name, v.location, v.capacity, cl.club_id, cl.club_name, cl.slug, cl.category, cl.logo_icon';
 
     // Sorting
     switch ($sort) {
@@ -138,7 +145,7 @@ try {
             ];
         }
 
-        // Format and attach nested venue and categories
+        // Format and attach nested venue, club, and categories
         foreach ($events as &$ev) {
             $ev['event_id']         = (int)$ev['event_id'];
             $ev['max_capacity']     = (int)$ev['max_capacity'];
@@ -151,6 +158,13 @@ try {
                 'location'   => $ev['venue_location'],
                 'capacity'   => (int)$ev['venue_capacity']
             ];
+            $ev['club'] = $ev['club_id'] ? [
+                'club_id'   => (int)$ev['club_id'],
+                'club_name' => $ev['club_name'],
+                'slug'      => $ev['club_slug'],
+                'category'  => $ev['club_category'],
+                'logo_icon' => $ev['club_logo_icon']
+            ] : null;
 
             // Computed badge status for the frontend UI
             if ($ev['status'] === 'UPCOMING') {
@@ -167,5 +181,5 @@ try {
     sendSuccess('Events retrieved successfully.', $events);
 } catch (PDOException $e) {
     error_log('Events list error: ' . $e->getMessage());
-    sendError('Failed to retrieve event records.', ['database' => 'Query execution failed.'], 500);
+    sendError('Failed to retrieve event records.', 500);
 }

@@ -26,13 +26,13 @@ class Database {
     public static function getConnection(): PDO {
         if (self::$instance === null) {
             $host = getenv('DB_HOST') ?: self::DB_HOST;
-            $port = getenv('DB_PORT') ?: self::DB_PORT;
+            $primaryPort = getenv('DB_PORT') ?: self::DB_PORT;
             $db   = getenv('DB_NAME') ?: self::DB_NAME;
             $user = getenv('DB_USER') ?: self::DB_USER;
             $pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : self::DB_PASS;
             $charset = self::DB_CHARSET;
 
-            $dsn = "mysql:host={$host};port={$port};dbname={$db};charset={$charset}";
+            $candidatePorts = array_unique([$primaryPort, '3307', '3306']);
 
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -41,12 +41,20 @@ class Database {
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$charset} COLLATE utf8mb4_unicode_ci"
             ];
 
-            try {
-                self::$instance = new PDO($dsn, $user, $pass, $options);
-            } catch (PDOException $e) {
-                // Return null or rethrow with sanitization so credentials are not exposed
-                error_log("Database connection error: " . $e->getMessage());
-                throw new PDOException("Database connection failure. Please verify MySQL service and credentials.", (int)$e->getCode());
+            $lastException = null;
+            foreach ($candidatePorts as $port) {
+                try {
+                    $dsn = "mysql:host={$host};port={$port};dbname={$db};charset={$charset}";
+                    self::$instance = new PDO($dsn, $user, $pass, $options);
+                    break;
+                } catch (PDOException $e) {
+                    $lastException = $e;
+                }
+            }
+
+            if (self::$instance === null) {
+                error_log("Database connection error: " . ($lastException ? $lastException->getMessage() : 'Unknown error'));
+                throw new PDOException("Database connection failure. Please verify MySQL service and credentials.", (int)($lastException ? $lastException->getCode() : 0));
             }
         }
 

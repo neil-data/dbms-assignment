@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>College Event & Registration Management System</title>
-  <meta name="description" content="A database-driven college event and registration management system featuring public event discovery, student portal, and comprehensive admin management." />
-  <meta property="og:title" content="College Event & Registration Management System" />
-  <meta property="og:description" content="A database-driven college event and registration management system featuring public event discovery, student portal, and comprehensive admin management." />
+  <title>CEMS — College Clubs, Events &amp; Student Community</title>
+  <meta name="description" content="Discover student clubs, upcoming events, and communities across your campus. Find your people and participate in collegiate life." />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
@@ -19,373 +17,320 @@
 <body>
 
   <!-- =========================================================================
-       CINEMATIC ATMOSPHERIC LIGHT TRAILS (PRIMARY SCREENSHOT RE-CREATION)
+       GLOBAL HEADER & NAVIGATION
        ========================================================================= -->
-  <div class="cinematic-background" aria-hidden="true">
-    <div class="glow-nebula-blue"></div>
-    <div class="glow-nebula-gold"></div>
-    <div class="dust-particles"></div>
-
-    <!-- Central Horizon Flare -->
-    <div class="horizon-flare"></div>
-    <div class="horizon-spark"></div>
-
-    <!-- Scalable Cinematic Fiber-Optic Trails -->
-    <svg class="light-trails-svg" viewBox="0 0 1920 1080" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- Gold Gradients -->
-        <linearGradient id="goldBeamLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f5cf68" stop-opacity="0" />
-          <stop offset="35%" stop-color="#f5cf68" stop-opacity="0.75" />
-          <stop offset="85%" stop-color="#fff4cc" stop-opacity="1" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
-        </linearGradient>
-
-        <linearGradient id="goldBeamRight" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#f5cf68" stop-opacity="0" />
-          <stop offset="35%" stop-color="#f5cf68" stop-opacity="0.75" />
-          <stop offset="85%" stop-color="#fff4cc" stop-opacity="1" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
-        </linearGradient>
-
-        <!-- Blue Gradients -->
-        <linearGradient id="blueBeamLeft" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#0284c7" stop-opacity="0" />
-          <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.8" />
-          <stop offset="90%" stop-color="#bae6fd" stop-opacity="1" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
-        </linearGradient>
-
-        <linearGradient id="blueBeamRight" x1="100%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#0284c7" stop-opacity="0" />
-          <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.8" />
-          <stop offset="90%" stop-color="#bae6fd" stop-opacity="1" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
-        </linearGradient>
-
-        <!-- Soft Glow Filters -->
-        <filter id="glowGold" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="8" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-
-        <filter id="glowBlue" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="9" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <!-- UPPER GOLDEN LIGHT TRAILS (Flowing inward from top left & right) -->
-      <g filter="url(#glowGold)">
-        <!-- Broad ambient glow ribbon -->
-        <path class="light-trail-gold" d="M -80 140 C 420 200, 720 460, 960 580" stroke="url(#goldBeamLeft)" stroke-width="10" stroke-linecap="round" stroke-dasharray="800 200" opacity="0.4" />
-        <path class="light-trail-gold" d="M 2000 140 C 1500 200, 1200 460, 960 580" stroke="url(#goldBeamRight)" stroke-width="10" stroke-linecap="round" stroke-dasharray="800 200" opacity="0.4" />
-
-        <!-- Sharp laser lines -->
-        <path class="light-trail-gold" d="M -50 180 C 450 250, 750 480, 960 580" stroke="url(#goldBeamLeft)" stroke-width="2.5" stroke-dasharray="600 300" />
-        <path class="light-trail-gold" d="M 1970 180 C 1470 250, 1170 480, 960 580" stroke="url(#goldBeamRight)" stroke-width="2.5" stroke-dasharray="600 300" />
-
-        <!-- Additional fine streaks -->
-        <path class="light-trail-gold" d="M -20 100 C 480 180, 780 430, 960 580" stroke="url(#goldBeamLeft)" stroke-width="1.2" opacity="0.8" />
-        <path class="light-trail-gold" d="M 1940 100 C 1440 180, 1140 430, 960 580" stroke="url(#goldBeamRight)" stroke-width="1.2" opacity="0.8" />
-      </g>
-
-      <!-- LOWER ELECTRIC CYAN/BLUE LIGHT TRAILS (Flowing inward from bottom left & right) -->
-      <g filter="url(#glowBlue)">
-        <!-- Broad ambient glow ribbon -->
-        <path class="light-trail-blue" d="M -80 980 C 420 900, 740 700, 960 580" stroke="url(#blueBeamLeft)" stroke-width="12" stroke-linecap="round" stroke-dasharray="900 250" opacity="0.45" />
-        <path class="light-trail-blue" d="M 2000 980 C 1500 900, 1180 700, 960 580" stroke="url(#blueBeamRight)" stroke-width="12" stroke-linecap="round" stroke-dasharray="900 250" opacity="0.45" />
-
-        <!-- Sharp laser lines -->
-        <path class="light-trail-blue" d="M -40 920 C 440 830, 760 670, 960 580" stroke="url(#blueBeamLeft)" stroke-width="2.8" stroke-dasharray="700 250" />
-        <path class="light-trail-blue" d="M 1960 920 C 1480 830, 1160 670, 960 580" stroke="url(#blueBeamRight)" stroke-width="2.8" stroke-dasharray="700 250" />
-
-        <!-- Additional fine streaks -->
-        <path class="light-trail-blue" d="M -10 1040 C 460 940, 770 720, 960 580" stroke="url(#blueBeamLeft)" stroke-width="1.4" opacity="0.85" />
-        <path class="light-trail-blue" d="M 1930 1040 C 1460 940, 1150 720, 960 580" stroke="url(#blueBeamRight)" stroke-width="1.4" opacity="0.85" />
-      </g>
-    </svg>
-
-    <div class="vignette-overlay"></div>
-  </div>
-
-  <!-- =========================================================================
-       NAVIGATION HEADER
-       ========================================================================= -->
-  <header class="cems-header" id="cems-header">
+  <header class="cems-header">
     <div class="nav-container">
-      <a href="index.html" class="brand-logo" id="header-brand-link">
-        <span class="brand-name">CEMS</span>
-        <span class="brand-tag">Academic v2.4</span>
+      <a href="index.html" class="brand-logo" aria-label="CEMS Homepage">
+        <span>CEMS</span>
+        <span class="brand-dot"></span>
       </a>
 
-      <nav class="nav-links" id="main-nav">
+      <nav class="nav-links" aria-label="Primary Navigation">
         <a href="index.html" class="nav-link active">Home</a>
+        <a href="clubs.html" class="nav-link">Clubs</a>
         <a href="events.html" class="nav-link">Events</a>
-        <a href="#workflow" class="nav-link">Workflow</a>
-        <a href="#categories" class="nav-link">Categories</a>
-        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#workflows" class="nav-link">Workflows</a>
+        <a href="clubs.html" class="nav-link">Community</a>
+        <a href="#about" class="nav-link">About</a>
       </nav>
 
-      <div class="nav-actions" id="header-nav-actions">
-        <!-- Injected dynamically via main.js -->
-        <a href="login.html" class="nav-auth-link">Sign In</a>
-        <a href="events.html" class="btn btn-primary btn-pill-arrow">
-          <span>Explore Events</span>
-          <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+      <div class="nav-actions">
+        <!-- Dynamically populated by js/main.js with session state -->
+        <button class="nav-icon-btn" id="global-search-btn" title="Search" aria-label="Search">
+          <span class="material-symbols-outlined" style="font-size: 19px;">search</span>
+        </button>
+        <a href="login.html" class="nav-signin-link">Sign In</a>
+        <a href="register.html" class="btn btn-lime">
+          <span>Join CEMS &rarr;</span>
         </a>
       </div>
+
+      <button class="mobile-nav-toggle" aria-label="Open Mobile Menu">
+        <span class="material-symbols-outlined" style="font-size: 26px;">menu</span>
+      </button>
     </div>
   </header>
 
-  <!-- =========================================================================
-       HERO SECTION (PRIMARY REFERENCE BENCHMARK)
-       ========================================================================= -->
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <span>CEMS</span>
+          <span class="brand-dot"></span>
+        </div>
+        <button class="mobile-nav-close" style="background:transparent;border:none;color:var(--text-primary);cursor:pointer;">
+          <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+        </button>
+      </div>
+      <ul class="mobile-nav-links" id="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
+        <li><a href="clubs.html" class="mobile-nav-link">Clubs</a></li>
+        <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+        <li><a href="#workflows" class="mobile-nav-link">Workflows</a></li>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <a href="register.html" class="btn btn-lime" style="width: 100%; margin-bottom: 0.75rem;">Join CEMS &rarr;</a>
+      <a href="login.html" class="btn btn-ghost" style="width: 100%;">Sign In</a>
+    </div>
+  </div>
+
   <main>
-    <section class="hero-section" id="hero">
-      <div class="hero-content">
-        <!-- Editorial Eyebrow -->
-        <div class="hero-eyebrow" id="hero-badge">
-          <span class="pulse-dot"></span>
-          <span>COLLEGE EVENT MANAGEMENT SYSTEM</span>
-        </div>
-
-        <!-- Grand Centered Typography -->
-        <h1 class="hero-title" id="hero-heading">
-          <span class="title-line">Discover. Register.</span>
-          <span class="title-line accent-glow">Experience Campus.</span>
-        </h1>
-
-        <!-- High-contrast Subtitle -->
-        <p class="hero-subtitle" id="hero-desc">
-          One intelligent platform for discovering college events, managing registrations, and tracking student participation across every academic discipline.
-        </p>
-
-        <!-- Call to Action Buttons -->
-        <div class="hero-cta-group" id="hero-actions">
-          <a href="events.html" class="btn btn-primary btn-pill-arrow" id="hero-primary-btn">
-            <span>Explore Events</span>
-            <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
-          </a>
-          <a href="login.html" class="btn btn-secondary" id="hero-secondary-btn">
-            <span>Student Portal</span>
-          </a>
-        </div>
-
-        <!-- Horizontal Feature Indicators (Matching Reference Screenshot) -->
-        <div class="hero-indicators" id="hero-indicators-bar">
-          <div class="indicator-item">
-            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
-            <span>EVENT DISCOVERY</span>
-          </div>
-          <div class="indicator-item">
-            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
-            <span>REAL-TIME REGISTRATION</span>
-          </div>
-          <div class="indicator-item">
-            <span class="material-symbols-outlined" style="font-size:14px;color:var(--gold-primary);vertical-align:middle;margin-right:3px;">chevron_right</span>
-            <span>CAMPUS PARTICIPATION</span>
-          </div>
-        </div>
-
-        <div class="hero-footer-caption">
-          Trusted by academic departments, faculty coordinators &amp; student bodies. 2026
-        </div>
-      </div>
-    </section>
-
     <!-- =======================================================================
-         FEATURED EVENTS SHOWCASE (EDITORIAL CARDS)
+         PRIMARY HERO SECTION (DIRECT RE-CREATION OF REFERENCE IMAGE)
          ======================================================================= -->
-    <section class="section-wrapper" id="featured-events-section">
-      <div class="section-header">
-        <div class="section-header-left">
-          <span class="section-eyebrow">CURATED CALENDAR</span>
-          <h2 class="section-title">Flagship Campus Events</h2>
-          <p class="section-subtitle">High-impact engineering symposiums, creative showcases, and national championships.</p>
-        </div>
-        <div>
-          <a href="events.html" class="btn btn-secondary">
-            <span>View All Events</span>
-            <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="events-grid" id="featured-events-container">
-        <!-- Rendered dynamically by js/main.js -->
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         EVENT CATEGORIES (MINIMALIST INTERACTIVE ROWS)
-         ======================================================================= -->
-    <section class="section-wrapper" id="categories">
-      <div class="section-header">
-        <div class="section-header-left">
-          <span class="section-eyebrow">DISCIPLINES & TRACKS</span>
-          <h2 class="section-title">Browse by Category</h2>
-          <p class="section-subtitle">Structured across academic, competitive, and extracurricular domains.</p>
-        </div>
-      </div>
-
-      <div class="category-rows" id="categories-container">
-        <!-- Rendered dynamically by js/main.js -->
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         HOW IT WORKS (WORKFLOW SEQUENCE)
-         ======================================================================= -->
-    <section class="section-wrapper" id="workflow">
-      <div class="section-header">
-        <div class="section-header-left">
-          <span class="section-eyebrow">SYSTEM WORKFLOW</span>
-          <h2 class="section-title">Seamless 3-Step Experience</h2>
-          <p class="section-subtitle">Engineered for instantaneous verification and zero friction.</p>
-        </div>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="workflow-step">
-          <div class="step-header">
-            <span class="step-num">01</span>
-            <div class="step-icon-wrap">
-              <span class="material-symbols-outlined">search</span>
+    <section class="hero-editorial">
+      <div class="section-wrapper">
+        <div class="hero-editorial-grid">
+          
+          <!-- Left Column: Editorial Typography -->
+          <div class="hero-content">
+            <div class="eyebrow-pill">
+              <span>CLUBS &times; EVENTS &times; COMMUNITY</span>
             </div>
-          </div>
-          <h3 class="step-title">Discover</h3>
-          <p class="step-desc">
-            Explore curated event listings filtered by academic department, venue capacity, schedule constraints, and category tracks.
-          </p>
-        </div>
 
-        <div class="workflow-step">
-          <div class="step-header">
-            <span class="step-num">02</span>
-            <div class="step-icon-wrap">
-              <span class="material-symbols-outlined">how_to_reg</span>
-            </div>
-          </div>
-          <h3 class="step-title">Register</h3>
-          <p class="step-desc">
-            Instantly reserve your seat with single-click institutional authorization. Real-time DBMS quota synchronization prevents overbooking.
-          </p>
-        </div>
+            <h1 class="hero-headline">
+              Find Your Club.<br />
+              <span class="text-lime">Build What&rsquo;s Next.</span>
+            </h1>
 
-        <div class="workflow-step">
-          <div class="step-header">
-            <span class="step-num">03</span>
-            <div class="step-icon-wrap">
-              <span class="material-symbols-outlined">qr_code_scanner</span>
-            </div>
-          </div>
-          <h3 class="step-title">Participate</h3>
-          <p class="step-desc">
-            Access your cryptographic digital gate pass with verification QR codes, track attendance history, and build your co-curricular record.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         DBMS ARCHITECTURE & PLATFORM PREVIEW
-         ======================================================================= -->
-    <section class="section-wrapper" id="architecture">
-      <div class="preview-container">
-        <div class="preview-top-bar">
-          <div class="window-dots">
-            <span class="window-dot" style="background:#ef4444;"></span>
-            <span class="window-dot" style="background:#f59e0b;"></span>
-            <span class="window-dot" style="background:#10b981;"></span>
-          </div>
-          <span class="window-title">CEMS Relational Core â€¢ Schema &amp; Storage Architecture</span>
-          <span style="color:var(--gold-primary);font-size:0.8rem;font-family:var(--font-display);">3NF Compliant</span>
-        </div>
-
-        <div class="preview-split">
-          <div>
-            <span class="section-eyebrow">RELATIONAL ENTITY RELATIONSHIP</span>
-            <h3 style="font-family:var(--font-display);font-size:1.75rem;margin-bottom:1rem;color:var(--text-primary);">
-              Institutional Data Integrity
-            </h3>
-            <p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.65;margin-bottom:1.5rem;">
-              Built on relational normalization standards, CEMS enforces foreign key constraints across Departments, Venues, Students, Events, and Registrations.
+            <p class="hero-description">
+              CEMS brings together college clubs, events, and student communities in one place &mdash; so you can explore, join, and be part of something bigger.
             </p>
 
-            <div class="sql-snippet">
-              <span class="keyword">SELECT</span> e.title, v.venue_name, <span class="func">COUNT</span>(r.registration_id) <span class="keyword">AS</span> enrolled,<br/>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.max_capacity - <span class="func">COUNT</span>(r.registration_id)) <span class="keyword">AS</span> seats_available<br/>
-              <span class="keyword">FROM</span> <span class="table">EVENT</span> e<br/>
-              <span class="keyword">JOIN</span> <span class="table">VENUE</span> v <span class="keyword">ON</span> e.venue_id = v.venue_id<br/>
-              <span class="keyword">LEFT JOIN</span> <span class="table">REGISTRATION</span> r <span class="keyword">ON</span> e.event_id = r.event_id <span class="keyword">AND</span> r.status = <span class="table">'Confirmed'</span><br/>
-              <span class="keyword">GROUP BY</span> e.event_id<br/>
-              <span class="keyword">ORDER BY</span> enrolled <span class="keyword">DESC</span>;
-            </div>
-          </div>
-
-          <div class="schema-diagram">
-            <div class="schema-node-grid">
-              <div class="schema-node highlight">
-                <div class="node-title">
-                  <span class="material-symbols-outlined" style="font-size:16px;">school</span>
-                  <span>DEPARTMENT</span>
-                </div>
-                <div class="node-fields">
-                  PK: dept_id<br/>
-                  dept_name, code, head
-                </div>
-              </div>
-
-              <div class="schema-node highlight">
-                <div class="node-title">
-                  <span class="material-symbols-outlined" style="font-size:16px;">badge</span>
-                  <span>STUDENT</span>
-                </div>
-                <div class="node-fields">
-                  PK: student_id<br/>
-                  FK: dept_id (DEPARTMENT)<br/>
-                  name, email, semester
-                </div>
-              </div>
-
-              <div class="schema-node highlight">
-                <div class="node-title">
-                  <span class="material-symbols-outlined" style="font-size:16px;">meeting_room</span>
-                  <span>VENUE</span>
-                </div>
-                <div class="node-fields">
-                  PK: venue_id<br/>
-                  venue_name, location, capacity
-                </div>
-              </div>
-
-              <div class="schema-node highlight">
-                <div class="node-title">
-                  <span class="material-symbols-outlined" style="font-size:16px;">confirmation_number</span>
-                  <span>REGISTRATION</span>
-                </div>
-                <div class="node-fields">
-                  PK: registration_id<br/>
-                  FK: student_id, event_id<br/>
-                  status, ticket_token
-                </div>
-              </div>
-            </div>
-
-            <div style="text-align:center;padding-top:0.5rem;">
-              <a href="admin.html" class="btn btn-secondary" style="font-size:0.84rem;">
-                <span class="material-symbols-outlined" style="font-size:18px;">database</span>
-                <span>Open Relational Admin Console</span>
+            <div class="hero-cta-group">
+              <a href="clubs.html" class="btn btn-lime">
+                <span>Explore Clubs &rarr;</span>
+              </a>
+              <a href="events.html" class="btn btn-ghost">
+                <span>Browse Events &rarr;</span>
               </a>
             </div>
           </div>
+
+          <!-- Right Column: Campus Architecture with Semicircular Luminous Arc -->
+          <div class="hero-visual-wrapper">
+            <div class="hero-visual-container">
+              
+              <!-- Architectural Monochromatic Frame -->
+              <div class="hero-photo-frame">
+                <img 
+                  src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop" 
+                  alt="Modern university campus architecture" 
+                  class="hero-photo-img"
+                  onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop'"
+                />
+              </div>
+
+              <!-- Signature Luminous Semicircular Arc Gauge & Celestial Orbits -->
+              <svg class="hero-arc-overlay" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Celestial Orbit Ellipse -->
+                <ellipse cx="250" cy="250" rx="220" ry="140" class="arc-orbit-line" transform="rotate(-25 250 250)" />
+                <ellipse cx="250" cy="250" rx="190" ry="120" class="arc-orbit-line" stroke-opacity="0.06" transform="rotate(15 250 250)" />
+
+                <!-- Thick Semicircular Arc Gauge (Backtrack) -->
+                <path 
+                  d="M 120 340 A 160 160 0 1 1 380 340" 
+                  stroke="rgba(255, 255, 255, 0.15)" 
+                  stroke-width="28" 
+                  stroke-linecap="round"
+                />
+
+                <!-- Gradient Luminous Arc Gauge Segment -->
+                <defs>
+                  <linearGradient id="arcLimeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#c8f936" stop-opacity="1" />
+                    <stop offset="60%" stop-color="#c8f936" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Glowing Lime Arc Segment -->
+                <path 
+                  d="M 120 340 A 160 160 0 0 1 200 120" 
+                  stroke="url(#arcLimeGrad)" 
+                  stroke-width="28" 
+                  stroke-linecap="round"
+                  class="arc-gauge-lime"
+                />
+
+                <!-- Four-Point Celestial Sparkle -->
+                <g transform="translate(195, 110)">
+                  <path d="M 0 -8 L 2 -2 L 8 0 L 2 2 L 0 8 L -2 2 L -8 0 L -2 -2 Z" class="arc-sparkle" />
+                </g>
+              </svg>
+
+              <!-- Editorial Vertical Micro-column -->
+              <div class="editorial-micro-column" aria-hidden="true">
+                <span>MORE CLUBS</span>
+                <span>MORE PEOPLE</span>
+                <span>MORE IDEAS</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FEATURED CLUBS SECTION (IMAGE TILES CAROUSEL)
+         ======================================================================= -->
+    <section class="featured-clubs-section">
+      <div class="section-wrapper">
+        <div class="section-editorial-header">
+          <div class="section-label">
+            <span>FEATURED CLUBS</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 2.5rem;">
+            <div style="font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); display: none; @media(min-width:768px){display:block;}">
+              DIFFERENT CLUBS. SAME CAMPUS.
+            </div>
+
+            <div class="carousel-controls">
+              <span class="carousel-counter" id="featured-carousel-counter">01 / 04</span>
+              <button class="carousel-btn" id="carousel-prev" aria-label="Previous club">
+                <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+              </button>
+              <button class="carousel-btn" id="carousel-next" aria-label="Next club">
+                <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Editorial Club Tiles Grid -->
+        <div class="clubs-editorial-grid" id="featured-clubs-container">
+          <!-- Populated dynamically by js/clubs.js from real MySQL database -->
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 0;">
+            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Loading featured clubs...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         WORKFLOWS SECTION (EDITORIAL STORY)
+         ======================================================================= -->
+    <section class="workflows-section" id="workflows">
+      <div class="section-wrapper">
+        <h2 class="editorial-tagline-huge">
+          Your campus has more going on.<br />
+          <span style="color: var(--text-muted);">Find people who build what you care about.</span>
+        </h2>
+
+        <div class="workflow-steps-grid">
+          <div class="workflow-step">
+            <div class="step-number">01 &mdash; DISCOVER</div>
+            <h3 class="step-title">Explore Active Societies</h3>
+            <p class="step-text">
+              Browse student-led organizations spanning engineering, software, cinematic arts, competitive athletics, and startup incubators across all faculties.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <div class="step-number">02 &mdash; CONNECT</div>
+            <h3 class="step-title">Join Campus Communities</h3>
+            <p class="step-text">
+              Enroll directly into club rosters, meet coordinators, collaborate on projects, and participate in weekly physical workshops and hack nights.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <div class="step-number">03 &mdash; PARTICIPATE</div>
+            <h3 class="step-title">Attend Club Events</h3>
+            <p class="step-text">
+              Reserve verified gate passes with guaranteed quotas, avoiding overbooking through our relational ACID reservation engine.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         UPCOMING CLUB EVENTS SECTION
+         ======================================================================= -->
+    <section style="padding: 5rem 0; border-top: 1px solid var(--border-subtle);">
+      <div class="section-wrapper">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div class="section-label" style="margin-bottom: 0.5rem;">
+              <span>UPCOMING CALENDAR</span>
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em;">
+              Club-Hosted Events
+            </h2>
+          </div>
+          <a href="events.html" class="btn btn-ghost" style="font-size: 0.85rem;">
+            <span>Browse Full Calendar &rarr;</span>
+          </a>
+        </div>
+
+        <div class="events-editorial-grid" id="homepage-events-grid">
+          <!-- Populated by JS -->
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 0;">
+            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Loading upcoming events...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         COMMUNITY IMPACT METRICS
+         ======================================================================= -->
+    <section style="padding: 4.5rem 0; border-top: 1px solid var(--border-subtle); background-color: var(--bg-surface);">
+      <div class="section-wrapper">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: left;">
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; display: block; margin-bottom: 0.35rem;">Active Societies</span>
+            <strong style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--lime-accent);">8+</strong>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.25rem;">Recognized collegiate student clubs</p>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; display: block; margin-bottom: 0.35rem;">Campus Venues</span>
+            <strong style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">4</strong>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.25rem;">Labs, auditoriums &amp; halls mapped</p>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; display: block; margin-bottom: 0.35rem;">Capacity Governed</span>
+            <strong style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--text-primary);">930+</strong>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.25rem;">Total institutional seating quota</p>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; display: block; margin-bottom: 0.35rem;">ACID Transactions</span>
+            <strong style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--status-open);">100%</strong>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.25rem;">Pessimistic locking overbooking prevention</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         BOTTOM CALL TO ACTION BANNER
+         ======================================================================= -->
+    <section style="padding: 6rem 0; border-top: 1px solid var(--border-subtle); position: relative; overflow: hidden;">
+      <div class="section-wrapper" style="text-align: center; position: relative; z-index: 2;">
+        <span class="eyebrow-pill" style="margin-bottom: 1.25rem;">GET INVOLVED</span>
+        <h2 style="font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.035em; margin-bottom: 1.25rem;">
+          Ready to find your people?
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.25rem; line-height: 1.6;">
+          Join thousands of students building, organizing, and celebrating campus life every day.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="clubs.html" class="btn btn-lime">
+            <span>Explore Clubs &rarr;</span>
+          </a>
+          <a href="register.html" class="btn btn-ghost">
+            <span>Create Student Account</span>
+          </a>
         </div>
       </div>
     </section>
@@ -394,64 +339,129 @@
   <!-- =========================================================================
        FOOTER
        ========================================================================= -->
-  <footer class="cems-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="brand-logo" style="margin-bottom:0.75rem;">
-            <span class="brand-name">CEMS</span>
+  <footer class="cems-footer" id="about">
+    <div class="section-wrapper">
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-logo" style="font-size: 1.25rem;">
+            <span>CEMS</span>
+            <span class="brand-dot"></span>
           </div>
-          <p class="footer-desc">
-            Academic DBMS Project: College Event &amp; Registration Management System. Engineered for enterprise-grade performance, responsive delivery, and relational rigor.
+          <p class="footer-brand-desc">
+            College Event &amp; Registration Management System. Centralizing student societies, verified participation, and campus life on a normalized 3NF database architecture.
           </p>
         </div>
 
-        <div class="footer-columns">
-          <div>
-            <h4 class="footer-col-title">Navigation</h4>
-            <div class="footer-links">
-              <a href="index.html" class="footer-link">Home</a>
-              <a href="events.html" class="footer-link">All Events</a>
-              <a href="#workflow" class="footer-link">System Workflow</a>
-              <a href="#categories" class="footer-link">Event Categories</a>
-            </div>
-          </div>
+        <div>
+          <h4 class="footer-heading">Discover</h4>
+          <ul class="footer-links">
+            <li><a href="clubs.html">Campus Clubs</a></li>
+            <li><a href="events.html">Upcoming Events</a></li>
+            <li><a href="clubs.html?category=technology">Tech Societies</a></li>
+            <li><a href="clubs.html?category=arts">Arts &amp; Culture</a></li>
+          </ul>
+        </div>
 
-          <div>
-            <h4 class="footer-col-title">Portals</h4>
-            <div class="footer-links">
-              <a href="student-dashboard.html" class="footer-link">Student Portal</a>
-              <a href="admin.html" class="footer-link">Admin Console</a>
-              <a href="login.html" class="footer-link">Sign In</a>
-              <a href="register.html" class="footer-link">Student Registration</a>
-            </div>
-          </div>
+        <div>
+          <h4 class="footer-heading">Portals</h4>
+          <ul class="footer-links">
+            <li><a href="student-dashboard.html">Student Campus Hub</a></li>
+            <li><a href="profile.html">Member Profile</a></li>
+            <li><a href="login.html">Sign In</a></li>
+            <li><a href="admin.html">Admin Console</a></li>
+          </ul>
+        </div>
 
-          <div>
-            <h4 class="footer-col-title">Architecture</h4>
-            <div class="footer-links">
-              <span class="footer-link" style="cursor:default;">3NF Normalized</span>
-              <span class="footer-link" style="cursor:default;">Foreign Key Rules</span>
-              <span class="footer-link" style="cursor:default;">ACID Transactions</span>
-              <span class="footer-link" style="cursor:default;">PHP / MySQL Ready</span>
-            </div>
-          </div>
+        <div>
+          <h4 class="footer-heading">System</h4>
+          <ul class="footer-links">
+            <li><a href="database-demo.html">DBMS Demonstration</a></li>
+            <li><a href="docs/ER_DIAGRAM.md">ER Diagram (Peter Chen)</a></li>
+            <li><a href="docs/CEMS_DBMS_Project_Report.pdf" target="_blank">Academic Report (PDF)</a></li>
+            <li><a href="https://github.com/neil-data/dbms-assignment" target="_blank">GitHub Repository</a></li>
+          </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
-          &copy; 2026 College Event &amp; Registration Management System. Academic Portfolio Project.
-        </div>
-        <div class="system-status-indicator">
-          <span class="status-beacon"></span>
-          <span>Database: Not Connected</span>
+        <div>&copy; 2026 CEMS &bull; College Event &amp; Registration Management System. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem; align-items: center;">
+          <span style="color: var(--lime-accent); font-weight: 500;">MySQL 8.0 &bull; PHP 8.3 PDO &bull; 3NF Relational Model</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Application Logic -->
+  <!-- Scripts -->
   <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { initFeaturedClubs } from './js/clubs.js';
+    import { api } from './js/api.js';
+    import { escapeHtml } from './js/main.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initFeaturedClubs();
+
+      // Load 3 Upcoming events for homepage
+      const eventsGrid = document.getElementById('homepage-events-grid');
+      if (eventsGrid) {
+        api.get('backend/events/list.php', { featured: 1 })
+          .then(res => {
+            const events = res.data || [];
+            if (events.length === 0) {
+              eventsGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem 0; color: var(--text-muted);">
+                  <p>No upcoming events currently scheduled.</p>
+                </div>
+              `;
+              return;
+            }
+
+            eventsGrid.innerHTML = events.map(ev => {
+              const hostClub = ev.club || { club_name: 'Campus Community', logo_icon: 'groups', club_id: 1 };
+              return `
+                <div class="event-editorial-card">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                      <a href="club-details.html?id=${hostClub.club_id}" class="event-host-badge">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">${escapeHtml(hostClub.logo_icon || 'groups')}</span>
+                        <span>${escapeHtml(hostClub.club_name)}</span>
+                      </a>
+                      <span style="font-size: 0.72rem; color: var(--text-muted);">#${ev.event_id}</span>
+                    </div>
+
+                    <h3 class="event-card-title">
+                      <a href="event-details.html?id=${ev.event_id}" style="color: var(--text-primary);">${escapeHtml(ev.title || ev.event_name)}</a>
+                    </h3>
+                    <p class="event-card-desc">${escapeHtml(ev.description || '')}</p>
+
+                    <div class="event-meta-list">
+                      <div class="event-meta-item">
+                        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--lime-accent);">calendar_today</span>
+                        <span>${escapeHtml(ev.display_date || ev.date)}</span>
+                      </div>
+                      <div class="event-meta-item">
+                        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--text-secondary);">location_on</span>
+                        <span>${escapeHtml(ev.venue.venue_name)}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="event-card-action-bar">
+                    <span class="seats-badge"><strong>${ev.available_seats}</strong> seats left</span>
+                    <a href="event-details.html?id=${ev.event_id}" class="btn btn-lime" style="padding: 0.45rem 1.15rem; font-size: 0.8rem;">
+                      <span>Register &rarr;</span>
+                    </a>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          })
+          .catch(err => {
+            console.error('Error loading events:', err);
+          });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -99,6 +99,25 @@ class ApiClient {
       return { database_connected: false, authenticated: false, error: e.message };
     }
   }
+
+  // Club Endpoints
+  getClubs(params = {}) {
+    return this.get('backend/clubs/list.php', params);
+  }
+
+  getClub(idOrSlug) {
+    const isId = !isNaN(Number(idOrSlug));
+    const param = isId ? { id: idOrSlug } : { slug: idOrSlug };
+    return this.get('backend/clubs/get.php', param);
+  }
+
+  joinClub(clubId, action = 'toggle') {
+    return this.post('backend/clubs/join.php', { club_id: clubId, action });
+  }
+
+  getMyClubs() {
+    return this.get('backend/clubs/my.php');
+  }
 }
 
 export const api = new ApiClient();

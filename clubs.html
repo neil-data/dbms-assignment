@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Clubs &amp; Societies — CEMS</title>
+  <meta name="description" content="Discover student clubs and communities across campus. Connect with coordinators, participate in weekly activities, and find your people." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="cems-header scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="CEMS Homepage">
+        <span>CEMS</span>
+        <span class="brand-dot"></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="clubs.html" class="nav-link active">Clubs</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="index.html#workflows" class="nav-link">Workflows</a>
+        <a href="clubs.html" class="nav-link">Community</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Dynamically injected via main.js -->
+        <a href="login.html" class="nav-signin-link">Sign In</a>
+        <a href="register.html" class="btn btn-lime">
+          <span>Join CEMS &rarr;</span>
+        </a>
+      </div>
+
+      <button class="mobile-nav-toggle" aria-label="Open Mobile Menu">
+        <span class="material-symbols-outlined" style="font-size: 26px;">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <span>CEMS</span>
+          <span class="brand-dot"></span>
+        </div>
+        <button class="mobile-nav-close" style="background:transparent;border:none;color:var(--text-primary);cursor:pointer;">
+          <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+        </button>
+      </div>
+      <ul class="mobile-nav-links" id="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="clubs.html" class="mobile-nav-link active">Clubs</a></li>
+        <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+        <li><a href="index.html#workflows" class="mobile-nav-link">Workflows</a></li>
+        <li><a href="index.html#about" class="mobile-nav-link">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <a href="register.html" class="btn btn-lime" style="width: 100%; margin-bottom: 0.75rem;">Join CEMS &rarr;</a>
+      <a href="login.html" class="btn btn-ghost" style="width: 100%;">Sign In</a>
+    </div>
+  </div>
+
+  <main style="padding-top: calc(var(--header-height) + 3rem); min-height: 85vh; padding-bottom: 6rem;">
+    <div class="section-wrapper">
+
+      <!-- Discovery Title & Subtitle -->
+      <div style="margin-bottom: 3rem;">
+        <span class="eyebrow-pill" style="margin-bottom: 1rem;">CAMPUS DIRECTORY</span>
+        <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: var(--text-primary); letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 1rem;">
+          Find your people.
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 1.05rem; max-width: 580px; line-height: 1.6;">
+          Explore student-led societies across technology, arts, athletics, culture, and entrepreneurship. Discover your community, participate in weekly activities, and build together.
+        </p>
+      </div>
+
+      <!-- Controls: Category Pills & Keyword Search -->
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle);">
+        <div class="filter-bar">
+          <button class="filter-pill club-filter-pill active" data-category="all">All Societies</button>
+          <button class="filter-pill club-filter-pill" data-category="Technology">Technology</button>
+          <button class="filter-pill club-filter-pill" data-category="Arts">Arts</button>
+          <button class="filter-pill club-filter-pill" data-category="Cultural">Cultural</button>
+          <button class="filter-pill club-filter-pill" data-category="Sports">Sports</button>
+          <button class="filter-pill club-filter-pill" data-category="Entrepreneurship">Entrepreneurship</button>
+          <button class="filter-pill club-filter-pill" data-category="Academic">Academic</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <div class="search-input-wrap">
+            <span class="material-symbols-outlined search-icon-pos" style="font-size: 18px;">search</span>
+            <input type="text" id="clubs-search-input" class="search-input" placeholder="Search clubs or keywords..." aria-label="Search clubs" />
+          </div>
+          <span id="clubs-count-label" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Clubs Editorial Grid -->
+      <div class="clubs-editorial-grid" id="clubs-discovery-grid">
+        <!-- Injected via js/clubs.js -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
+          <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
+          <p style="color: var(--text-muted); margin-top: 1rem;">Discovering campus clubs...</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="cems-footer">
+    <div class="section-wrapper">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <div>&copy; 2026 CEMS &bull; College Event &amp; Registration Management System.</div>
+        <div><a href="index.html" style="color: var(--text-secondary);">Back to Homepage</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { initClubDiscovery } from './js/clubs.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      initClubDiscovery();
+    });
+  </script>
+</body>
+</html>

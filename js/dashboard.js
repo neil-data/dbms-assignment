@@ -21,135 +21,189 @@ export async function initStudentDashboard() {
   }
 
   container.innerHTML = `
+  container.innerHTML = `
     <div style="text-align: center; padding: 4rem 0;">
-      <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gold-primary); animation: spin 1s infinite linear;">sync</span>
-      <p style="color: var(--text-muted); margin-top: 1rem;">Querying student passes from database...</p>
+      <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
+      <p style="color: var(--text-muted); margin-top: 1rem;">Loading your campus activity hub...</p>
     </div>
   `;
 
   try {
-    const [profileRes, regRes] = await Promise.all([
+    const [profileRes, regRes, clubsRes, recClubsRes] = await Promise.all([
       api.get('backend/students/get.php'),
-      api.get('backend/registrations/list.php?my=1')
+      api.get('backend/registrations/list.php?my=1'),
+      api.getMyClubs().catch(() => ({ data: [] })),
+      api.getClubs({ featured: 1 }).catch(() => ({ data: [] }))
     ]);
 
     const student = profileRes.data;
     const registrations = regRes.data || [];
     const activePasses = registrations.filter(r => r.status === 'CONFIRMED');
+    const myClubs = clubsRes.data || [];
+    const recommendedClubs = recClubsRes.data || [];
+
+    // Greeting by time of day
+    const hour = new Date().getHours();
+    const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
     container.innerHTML = `
-      <!-- Student Profile Header Banner -->
-      <div style="background: linear-gradient(180deg, rgba(16, 28, 58, 0.85) 0%, rgba(11, 19, 41, 0.95) 100%); border: 1px solid var(--border-highlight); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-          <div style="display: flex; gap: 1.5rem; align-items: center;">
-            <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(245, 207, 104, 0.1); border: 2px solid var(--border-gold); display: flex; align-items: center; justify-content: center; color: var(--gold-primary);">
-              <span class="material-symbols-outlined" style="font-size: 38px;">person</span>
-            </div>
-            <div>
-              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.35rem;">
-                <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-primary);">
-                  ${escapeHtml(student.name)}
-                </h2>
-                <span class="badge-open" style="font-size: 0.75rem;">Enrolled</span>
-              </div>
-              <div style="display: flex; gap: 1.5rem; font-size: 0.86rem; color: var(--text-secondary); flex-wrap: wrap;">
-                <span>Student ID: <strong style="color: var(--text-primary); font-family: var(--font-display);">#${student.student_id}</strong></span>
-                <span>Department: <strong style="color: var(--text-primary);">${escapeHtml(student.department_name)}</strong></span>
-                <span>Semester: <strong style="color: var(--text-primary);">Semester ${student.semester}</strong></span>
-                <span>Email: <strong style="color: var(--text-muted);">${escapeHtml(student.email)}</strong></span>
-              </div>
-            </div>
+      <!-- Editorial Campus Hub Banner -->
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+          <div>
+            <span class="eyebrow-pill" style="margin-bottom: 0.75rem;">CAMPUS ACTIVITY HUB</span>
+            <h1 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--text-primary); line-height: 1.15; margin-bottom: 0.5rem;">
+              ${timeGreeting}, ${escapeHtml(student.name.split(' ')[0])}.
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1rem;">
+              Here's what's happening around your campus community.
+            </p>
           </div>
 
-          <div style="display: flex; gap: 1rem; align-items: center;">
+          <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
             <div style="text-align: right; padding-right: 1.5rem; border-right: 1px solid var(--border-subtle);">
-              <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Confirmed Passes</div>
-              <div style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--gold-primary);">
-                ${activePasses.length}
-              </div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); display: block;">Joined Clubs</span>
+              <strong style="font-family: var(--font-display); font-size: 1.6rem; color: var(--lime-accent);">${myClubs.length}</strong>
             </div>
-            <a href="events.html" class="btn btn-primary btn-pill-arrow">
-              <span>Explore Events</span>
-              <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+            <div style="text-align: right; padding-right: 1.5rem; border-right: 1px solid var(--border-subtle);">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); display: block;">Active Passes</span>
+              <strong style="font-family: var(--font-display); font-size: 1.6rem; color: var(--text-primary);">${activePasses.length}</strong>
+            </div>
+            <a href="clubs.html" class="btn btn-lime">
+              <span>Explore Clubs &rarr;</span>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Active Registered Passes Section -->
+      <!-- Section 1: Your Clubs -->
       <div style="margin-bottom: 3.5rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem;">
           <div>
-            <span class="section-eyebrow">ENROLLED PASSES</span>
-            <h3 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--text-primary);">
-              Digital Gate Access Credentials
-            </h3>
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-primary);">
+              Your Campus Clubs
+            </h2>
+            <p style="font-size: 0.86rem; color: var(--text-secondary);">Communities where you are actively enrolled</p>
           </div>
+          <a href="clubs.html" style="font-size: 0.85rem; color: var(--lime-accent); font-weight: 600;">Browse All Clubs &rarr;</a>
         </div>
 
-        <div id="student-passes-grid">
-          ${registrations.length === 0 ? `
-            <div style="text-align: center; padding: 4.5rem 2rem; background: var(--bg-card); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
-              <span class="material-symbols-outlined" style="font-size: 48px; color: var(--text-muted); margin-bottom: 1rem; display: inline-block;">confirmation_number</span>
-              <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                No registrations yet
-              </h4>
-              <p style="color: var(--text-secondary); max-width: 460px; margin: 0 auto 1.75rem; font-size: 0.92rem; line-height: 1.6;">
-                Select an event from the campus catalog to reserve your seat and generate an access pass.
-              </p>
-              <a href="events.html" class="btn btn-secondary" style="font-size: 0.88rem;">
-                <span class="material-symbols-outlined" style="font-size: 18px;">search</span>
-                <span>Explore Available Events</span>
-              </a>
-            </div>
-          ` : `
-            <div class="events-grid">
-              ${registrations.map(reg => {
-                const isCancelled = reg.status === 'CANCELLED';
-                return `
-                  <div class="event-card" style="border-color: ${isCancelled ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-gold)'}; opacity: ${isCancelled ? '0.7' : '1'};">
-                    <div class="event-card-top">
-                      <span class="event-number">#${reg.registration_id}</span>
-                      <span class="event-badge ${isCancelled ? 'badge-closed' : 'badge-open'}">${reg.status}</span>
-                    </div>
-                    <div>
-                      <h3 class="event-card-title">${escapeHtml(reg.event ? reg.event.title : 'Event Record')}</h3>
-                      <p style="font-size: 0.78rem; color: var(--gold-primary); margin-top: 0.2rem; font-family: monospace;">
-                        ${escapeHtml(reg.ticket_token)}
-                      </p>
-                    </div>
-                    <div>
-                      <div class="event-meta-list">
-                        <div class="event-meta-item">
-                          <span class="material-symbols-outlined">calendar_month</span>
-                          <span>${escapeHtml(reg.event ? (reg.event.display_date || reg.event.date) : '—')}</span>
-                        </div>
-                        <div class="event-meta-item">
-                          <span class="material-symbols-outlined">location_on</span>
-                          <span>${escapeHtml(reg.event && reg.event.venue ? reg.event.venue.venue_name : 'Campus Venue')}</span>
-                        </div>
-                      </div>
+        ${myClubs.length === 0 ? `
+          <div style="background: var(--bg-surface); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); padding: 3rem; text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 40px; color: var(--text-muted); margin-bottom: 0.75rem;">groups</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.4rem;">No clubs joined yet</h3>
+            <p style="color: var(--text-secondary); max-width: 420px; margin: 0 auto 1.5rem; font-size: 0.9rem;">
+              Connect with fellow students, participate in weekly workshops, and build what you care about.
+            </p>
+            <a href="clubs.html" class="btn btn-lime" style="font-size: 0.84rem;">
+              <span>Discover College Clubs &rarr;</span>
+            </a>
+          </div>
+        ` : `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            ${myClubs.map(cl => `
+              <div class="club-editorial-card" style="height: 260px;">
+                <div class="club-card-image-wrap">
+                  <img src="${escapeHtml(cl.cover_image || '')}" alt="${escapeHtml(cl.club_name)}" class="club-card-image" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop'" />
+                  <div class="club-card-overlay"></div>
+                </div>
+                <div class="club-card-content">
+                  <div class="club-card-header">
+                    <span class="club-category-pill">${escapeHtml(cl.category)}</span>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: var(--lime-accent); background: rgba(8,9,11,0.7); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); border: 1px solid var(--lime-border);">
+                      ${escapeHtml(cl.membership_role || 'MEMBER')}
+                    </span>
+                  </div>
+                  <div class="club-card-footer">
+                    <h3 class="club-card-title">
+                      <a href="club-details.html?id=${cl.club_id}" style="color: var(--text-primary);">${escapeHtml(cl.club_name)}</a>
+                      <a href="club-details.html?id=${cl.club_id}" class="arrow-circle-btn">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
+                      </a>
+                    </h3>
+                    <p class="club-card-tagline">${escapeHtml(cl.tagline)}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `}
+      </div>
 
-                      <div class="event-card-bottom" style="margin-top: 1.25rem;">
-                        ${!isCancelled ? `
-                          <button class="btn btn-primary view-ticket-btn" data-reg="${reg.registration_id}" style="font-size: 0.82rem; padding: 0.45rem 0.9rem;">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">qr_code</span>
-                            <span>View Pass</span>
-                          </button>
-                          <button class="btn btn-ghost cancel-reg-btn" data-reg="${reg.registration_id}" style="font-size: 0.82rem; color: var(--status-closing);" title="Cancel Pass">
-                            <span>Cancel</span>
-                          </button>
-                        ` : `
-                          <span style="font-size: 0.82rem; color: var(--status-closing);">Registration Withdrawn</span>
-                        `}
+      <!-- Section 2: Active Registered Event Passes -->
+      <div style="margin-bottom: 3.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem;">
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-primary);">
+              Your Event Passes
+            </h2>
+            <p style="font-size: 0.86rem; color: var(--text-secondary);">Gate credentials for upcoming club events</p>
+          </div>
+          <a href="events.html" style="font-size: 0.85rem; color: var(--lime-accent); font-weight: 600;">Browse Events &rarr;</a>
+        </div>
+
+        ${registrations.length === 0 ? `
+          <div style="background: var(--bg-surface); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); padding: 3rem; text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 40px; color: var(--text-muted); margin-bottom: 0.75rem;">confirmation_number</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.4rem;">No event passes issued</h3>
+            <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto 1.5rem; font-size: 0.9rem;">
+              You have not registered for any upcoming events. Explore the event catalog to reserve your place.
+            </p>
+            <a href="events.html" class="btn btn-ghost" style="font-size: 0.84rem;">
+              <span>Explore Upcoming Events &rarr;</span>
+            </a>
+          </div>
+        ` : `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+            ${registrations.map(reg => {
+              const isCancelled = reg.status === 'CANCELLED';
+              return `
+                <div class="event-editorial-card" style="opacity: ${isCancelled ? '0.6' : '1'};">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span style="font-size: 0.72rem; color: var(--lime-accent); font-weight: 600; text-transform: uppercase;">PASS #${reg.registration_id}</span>
+                      <span style="font-size: 0.72rem; padding: 0.2rem 0.5rem; border-radius: var(--radius-full); background: ${isCancelled ? 'rgba(239,68,68,0.1)' : 'rgba(200,249,54,0.1)'}; color: ${isCancelled ? 'var(--status-closed)' : 'var(--lime-accent)'}; font-weight: 600;">
+                        ${reg.status}
+                      </span>
+                    </div>
+
+                    <h3 class="event-card-title" style="font-size: 1.2rem; margin-bottom: 0.35rem;">
+                      ${escapeHtml(reg.event ? reg.event.title : 'Event Record')}
+                    </h3>
+                    <div style="font-family: monospace; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1rem;">
+                      TOKEN: ${escapeHtml(reg.ticket_token || 'TOKEN-ISSUED')}
+                    </div>
+
+                    <div class="event-meta-list" style="margin-bottom: 1rem;">
+                      <div class="event-meta-item">
+                        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--lime-accent);">calendar_month</span>
+                        <span>${escapeHtml(reg.event ? (reg.event.display_date || reg.event.date) : 'TBA')}</span>
+                      </div>
+                      <div class="event-meta-item">
+                        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--text-secondary);">location_on</span>
+                        <span>${escapeHtml(reg.event && reg.event.venue ? reg.event.venue.venue_name : 'Campus Venue')}</span>
                       </div>
                     </div>
                   </div>
-                `;
-              }).join('')}
-            </div>
-          `}
-        </div>
+
+                  <div class="event-card-action-bar">
+                    ${!isCancelled ? `
+                      <button class="btn btn-lime view-ticket-btn" data-reg="${reg.registration_id}" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">qr_code</span>
+                        <span>Show QR Pass</span>
+                      </button>
+                      <button class="btn btn-ghost cancel-reg-btn" data-reg="${reg.registration_id}" style="padding: 0.4rem 0.9rem; font-size: 0.8rem; color: var(--status-closed);" title="Cancel Pass">
+                        <span>Cancel</span>
+                      </button>
+                    ` : `
+                      <span style="font-size: 0.8rem; color: var(--text-muted);">Pass Withdrawn</span>
+                    `}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `}
       </div>
     `;
 
@@ -163,7 +217,7 @@ export async function initStudentDashboard() {
     // Attach Cancel Registration Handlers
     document.querySelectorAll('.cancel-reg-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Are you sure you want to cancel this registration? Your seat will be released.')) {
+        if (!confirm('Cancel this event registration? Your reserved seat will be released back to the event.')) {
           return;
         }
 

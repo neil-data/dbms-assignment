@@ -2,6 +2,7 @@
 /**
  * CEMS - Get Single Event Details Endpoint
  * GET /backend/events/get.php?id=...
+ * Returns complete event dossier, venue, host club, categories, and student registration status.
  */
 
 declare(strict_types=1);
@@ -36,13 +37,21 @@ try {
             v.venue_name,
             v.location AS venue_location,
             v.capacity AS venue_capacity,
+            cl.club_id,
+            cl.club_name,
+            cl.slug AS club_slug,
+            cl.category AS club_category,
+            cl.tagline AS club_tagline,
+            cl.logo_icon AS club_logo_icon,
+            cl.cover_image AS club_cover_image,
             COUNT(CASE WHEN r.status = "CONFIRMED" THEN 1 END) AS registered_count,
             GREATEST(0, e.max_capacity - COUNT(CASE WHEN r.status = "CONFIRMED" THEN 1 END)) AS available_seats
         FROM event e
         INNER JOIN venue v ON e.venue_id = v.venue_id
+        LEFT JOIN club cl ON e.club_id = cl.club_id
         LEFT JOIN registration r ON e.event_id = r.event_id
         WHERE e.event_id = ?
-        GROUP BY e.event_id, e.event_name, e.description, e.event_date, e.event_time, e.max_capacity, e.status, v.venue_id, v.venue_name, v.location, v.capacity
+        GROUP BY e.event_id, e.event_name, e.description, e.event_date, e.event_time, e.max_capacity, e.status, v.venue_id, v.venue_name, v.location, v.capacity, cl.club_id, cl.club_name, cl.slug, cl.category, cl.tagline, cl.logo_icon, cl.cover_image
         LIMIT 1
     ');
     $stmt->execute([$id]);
@@ -69,6 +78,16 @@ try {
         'location'   => $event['venue_location'],
         'capacity'   => (int)$event['venue_capacity']
     ];
+
+    $event['club'] = $event['club_id'] ? [
+        'club_id'     => (int)$event['club_id'],
+        'club_name'   => $event['club_name'],
+        'slug'        => $event['club_slug'],
+        'category'    => $event['club_category'],
+        'tagline'     => $event['club_tagline'],
+        'logo_icon'   => $event['club_logo_icon'],
+        'cover_image' => $event['club_cover_image']
+    ] : null;
 
     $event['event_id']         = (int)$event['event_id'];
     $event['max_capacity']     = (int)$event['max_capacity'];
