@@ -11,18 +11,20 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    sendError('Method not allowed. Use POST.', [], 405);
+}
+
 // Strict Authentication Enforcement
-requireRole('student');
+$session = requireStudentAuth();
+$studentId = (int)$session['user_id'];
 
 try {
     $pdo = Database::getConnection();
-    $studentId = (int)$_SESSION['user_id'];
 
-    $rawInput = file_get_contents('php://input');
-    $data = json_decode($rawInput, true) ?? $_POST;
-
-    $clubId = isset($data['club_id']) ? (int)$data['club_id'] : 0;
-    $action = trim($data['action'] ?? 'toggle'); // 'join', 'leave', or 'toggle'
+    $input = getRequestData();
+    $clubId = isset($input['club_id']) ? (int)$input['club_id'] : 0;
+    $action = trim($input['action'] ?? 'toggle'); // 'join', 'leave', or 'toggle'
 
     if ($clubId <= 0) {
         sendError('Valid Club ID is required.', 400);

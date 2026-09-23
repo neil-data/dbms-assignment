@@ -222,6 +222,118 @@ export function escapeHtml(str) {
 }
 
 /**
+ * Interactive Digital Ticket / QR Pass Modal
+ */
+export async function openTicketModal(registrationId) {
+  let modalBackdrop = document.getElementById('ticket-modal-backdrop');
+  if (!modalBackdrop) {
+    modalBackdrop = document.createElement('div');
+    modalBackdrop.id = 'ticket-modal-backdrop';
+    modalBackdrop.className = 'modal-backdrop';
+    document.body.appendChild(modalBackdrop);
+  }
+
+  modalBackdrop.innerHTML = `
+    <div class="modal-dialog" style="max-width: 480px; text-align: center; padding: 2.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);">
+      <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
+      <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">Retrieving digital pass...</p>
+    </div>
+  `;
+  modalBackdrop.classList.add('open');
+
+  try {
+    const res = await api.get('backend/registrations/list.php?my=1');
+    const registrations = res.data || [];
+    const reg = registrations.find(r => String(r.registration_id) === String(registrationId));
+
+    if (!reg) {
+      modalBackdrop.classList.remove('open');
+      showToast('Registration pass record not found.', 'error');
+      return;
+    }
+
+    const token = reg.ticket_token || `CEMS-PASS-${String(reg.registration_id).padStart(6, '0')}`;
+    const studentName = reg.student ? reg.student.name : 'Student Attendee';
+    const deptName = reg.student && reg.student.department ? reg.student.department.dept_name : 'Academic Dept';
+    const eventTitle = reg.event ? reg.event.title : 'Campus Event';
+    const eventDate = reg.event ? (reg.event.display_date || reg.event.date) : 'TBA';
+    const venueName = reg.event && reg.event.venue ? reg.event.venue.venue_name : 'Campus Venue';
+
+    modalBackdrop.innerHTML = `
+      <div class="modal-dialog" style="max-width: 480px; text-align: center; padding: 2.5rem 2rem; background: var(--bg-surface); border: 1px solid var(--lime-border); border-radius: var(--radius-lg); position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+        <button id="modal-close" style="position: absolute; top: 1.25rem; right: 1.25rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer;" aria-label="Close">
+          <span class="material-symbols-outlined" style="font-size: 22px;">close</span>
+        </button>
+
+        <span class="eyebrow-pill" style="margin-bottom: 1rem;">DIGITAL ADMISSION PASS</span>
+        
+        <h2 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">
+          ${escapeHtml(eventTitle)}
+        </h2>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.75rem;">
+          ${escapeHtml(eventDate)} &bull; ${escapeHtml(venueName)}
+        </p>
+
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: 8px; display: inline-block; margin-bottom: 1.25rem;">
+          <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="white" />
+            <rect x="10" y="10" width="24" height="24" rx="2" fill="#08090b" />
+            <rect x="14" y="14" width="16" height="16" rx="1" fill="white" />
+            <rect x="17" y="17" width="10" height="10" fill="#08090b" />
+            
+            <rect x="66" y="10" width="24" height="24" rx="2" fill="#08090b" />
+            <rect x="70" y="14" width="16" height="16" rx="1" fill="white" />
+            <rect x="73" y="17" width="10" height="10" fill="#08090b" />
+            
+            <rect x="10" y="66" width="24" height="24" rx="2" fill="#08090b" />
+            <rect x="14" y="70" width="16" height="16" rx="1" fill="white" />
+            <rect x="17" y="73" width="10" height="10" fill="#08090b" />
+
+            <rect x="42" y="10" width="6" height="14" fill="#08090b" />
+            <rect x="52" y="16" width="6" height="18" fill="#08090b" />
+            <rect x="10" y="42" width="14" height="6" fill="#08090b" />
+            <rect x="28" y="42" width="14" height="6" fill="#08090b" />
+            <rect x="48" y="42" width="16" height="16" fill="#08090b" />
+            <rect x="70" y="42" width="20" height="6" fill="#08090b" />
+            <rect x="42" y="66" width="6" height="24" fill="#08090b" />
+            <rect x="54" y="74" width="16" height="6" fill="#08090b" />
+            <rect x="76" y="66" width="14" height="14" fill="#08090b" />
+          </svg>
+        </div>
+
+        <div style="font-family: monospace; font-size: 0.95rem; font-weight: 700; color: var(--lime-accent); letter-spacing: 0.08em; margin-bottom: 0.25rem;">
+          ${escapeHtml(token)}
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          PASS #${reg.registration_id} &bull; ${escapeHtml(studentName)} (${escapeHtml(deptName)})
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: center;">
+          <button class="btn btn-lime" onclick="window.print()" style="font-size: 0.84rem; padding: 0.5rem 1.25rem;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">print</span>
+            <span>Print Pass</span>
+          </button>
+          <button class="btn btn-ghost" id="modal-done-btn" style="font-size: 0.84rem; padding: 0.5rem 1.25rem;">
+            <span>Done</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    const close = () => modalBackdrop.classList.remove('open');
+    document.getElementById('modal-close')?.addEventListener('click', close);
+    document.getElementById('modal-done-btn')?.addEventListener('click', close);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) close();
+    });
+
+  } catch (err) {
+    modalBackdrop.classList.remove('open');
+    showToast('Failed to load pass: ' + err.message, 'error');
+  }
+}
+
+/**
  * Global App Initialization
  */
 document.addEventListener('DOMContentLoaded', () => {

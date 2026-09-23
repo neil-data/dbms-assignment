@@ -63,7 +63,13 @@ function sendSuccess(string $message, $data = null, int $statusCode = 200): void
 /**
  * Convenience helper for error response.
  */
-function sendError(string $message, array $errors = [], int $statusCode = 400): void {
+function sendError(string $message, $errors = [], int $statusCode = 400): void {
+    if (is_int($errors)) {
+        $statusCode = $errors;
+        $errors = [];
+    } elseif (!is_array($errors)) {
+        $errors = [];
+    }
     sendJsonResponse(false, $message, null, $statusCode, $errors);
 }
 

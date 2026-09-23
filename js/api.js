@@ -66,10 +66,30 @@ class ApiClient {
       const data = await response.json().catch(() => null);
 
       if (!response.ok) {
+        if (response.status === 405) {
+          console.error(`[API 405 Method Not Allowed]`);
+          console.error(`  Endpoint: ${cleanEndpoint}`);
+          console.error(`  Method:   ${fetchOptions.method}`);
+          console.error(`  URL:      ${url.toString()}`);
+          console.error(`  Payload: `, options.body);
+          console.error(`  Response:`, data);
+
+          const error = new Error('405 Method Not Allowed');
+          error.status = 405;
+          error.endpoint = cleanEndpoint;
+          error.method = fetchOptions.method;
+          error.data = data;
+          error.userMessage = 'Something went wrong while completing this action. Please try again.';
+          throw error;
+        }
+
         const errorMsg = (data && data.message) ? data.message : `HTTP error ${response.status}`;
         const error = new Error(errorMsg);
         error.status = response.status;
+        error.endpoint = cleanEndpoint;
+        error.method = fetchOptions.method;
         error.data = data;
+        error.userMessage = errorMsg;
         throw error;
       }
 
@@ -113,6 +133,10 @@ class ApiClient {
 
   joinClub(clubId, action = 'toggle') {
     return this.post('backend/clubs/join.php', { club_id: clubId, action });
+  }
+
+  leaveClub(clubId) {
+    return this.post('backend/clubs/leave.php', { club_id: clubId });
   }
 
   getMyClubs() {

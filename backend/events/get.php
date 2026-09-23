@@ -12,6 +12,10 @@ require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 require_once __DIR__ . '/../shared/validation.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    sendError('Method not allowed. Use GET.', [], 405);
+}
+
 $id = $_GET['id'] ?? null;
 if (!isValidId($id)) {
     sendError('Valid event ID is required.', ['id' => 'Parameter missing or invalid.'], 422);

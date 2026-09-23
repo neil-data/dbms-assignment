@@ -11,13 +11,13 @@ require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 require_once __DIR__ . '/../shared/validation.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    sendError('Method not allowed. Use POST.', [], 405);
+}
+
 $session = getCurrentSession();
 if (!$session) {
     sendError('Authentication required.', [], 401);
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    sendError('Method not allowed. Use POST.', [], 405);
 }
 
 $input = getRequestData();

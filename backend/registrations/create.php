@@ -13,13 +13,13 @@ require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 require_once __DIR__ . '/../shared/validation.php';
 
-// 1. Verify Student Authentication
-$session = requireStudentAuth();
-$studentId = (int)$session['user_id'];
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendError('Method not allowed. Use POST.', [], 405);
 }
+
+// 1. Verify Student Authentication
+$session = requireStudentAuth();
+$studentId = (int)$session['user_id'];
 
 $input   = getRequestData();
 $eventId = $input['event_id'] ?? null;

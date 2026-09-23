@@ -9,6 +9,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../shared/response.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    sendError('Method not allowed. Use GET.', [], 405);
+}
+
 try {
     $pdo = Database::getConnection();
 

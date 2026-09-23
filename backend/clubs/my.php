@@ -11,11 +11,15 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 
-requireRole('student');
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    sendError('Method not allowed. Use GET.', [], 405);
+}
+
+$session = requireStudentAuth();
+$studentId = (int)$session['user_id'];
 
 try {
     $pdo = Database::getConnection();
-    $studentId = (int)$_SESSION['user_id'];
 
     $sql = '
         SELECT 

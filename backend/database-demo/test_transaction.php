@@ -11,11 +11,11 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 
-requireAdminAuth();
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendError('Method not allowed. Use POST.', [], 405);
 }
+
+requireAdminAuth();
 
 $input  = getRequestData();
 $action = trim((string)($input['action'] ?? 'commit'));

@@ -11,6 +11,10 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    sendError('Method not allowed. Use GET.', [], 405);
+}
+
 requireAdminAuth();
 
 $type = trim($_GET['type'] ?? 'multi_join');

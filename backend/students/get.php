@@ -11,6 +11,10 @@ require_once __DIR__ . '/../shared/response.php';
 require_once __DIR__ . '/../shared/auth.php';
 require_once __DIR__ . '/../shared/validation.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    sendError('Method not allowed. Use GET.', [], 405);
+}
+
 $session = getCurrentSession();
 if (!$session) {
     sendError('Authentication required.', [], 401);
