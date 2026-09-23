@@ -21,7 +21,6 @@ export async function initStudentDashboard() {
   }
 
   container.innerHTML = `
-  container.innerHTML = `
     <div style="text-align: center; padding: 4rem 0;">
       <span class="material-symbols-outlined" style="font-size: 32px; color: var(--lime-accent); animation: spin 1s infinite linear;">sync</span>
       <p style="color: var(--text-muted); margin-top: 1rem;">Loading your campus activity hub...</p>
@@ -980,6 +979,8 @@ export async function initAdminConsole() {
 
   renderAdmin();
 }
+
+export const initAdminDashboard = initAdminConsole;
 
 // Auto Initialize
 function autoInitDashboard() {
