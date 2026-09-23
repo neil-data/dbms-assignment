@@ -10,6 +10,19 @@ class ApiClient {
   }
 
   resolveBaseUrl() {
+    // 1. Explicit override if set
+    if (typeof window !== 'undefined' && window.CEMS_API_BASE) {
+      return window.CEMS_API_BASE.replace(/\/?$/, '/');
+    }
+
+    // 2. Detect static dev servers (e.g., VS Code Live Server on 5500/5501, Vite on 5173, etc.)
+    // Static servers cannot execute PHP scripts and return HTTP 405 Method Not Allowed on POST requests.
+    const staticDevPorts = ['5500', '5501', '5502', '3000', '5173', '4173'];
+    if (typeof window !== 'undefined' && staticDevPorts.includes(window.location.port)) {
+      console.info(`[CEMS API] Static server detected on port ${window.location.port}. Routing backend requests to PHP server at http://127.0.0.1:8080/`);
+      return 'http://127.0.0.1:8080/';
+    }
+
     const path = window.location.pathname;
     // Find where the project root is (if in a subdirectory like /cems/ or /cems-app/)
     // Check if we are inside /admin/ or other nested folder
@@ -48,8 +61,8 @@ class ApiClient {
         'Accept': 'application/json',
         ...(options.headers || {})
       },
-      // Important: Include cookies for PHP session persistence
-      credentials: 'same-origin'
+      // Important: 'include' passes credentials (cookies) across same-origin and localhost cross-port (e.g. 5500 -> 8080)
+      credentials: 'include'
     };
 
     if (options.body) {

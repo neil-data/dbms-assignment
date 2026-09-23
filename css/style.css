@@ -385,94 +385,68 @@ button, input, select, textarea {
 .hero-visual-container {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  aspect-ratio: 1 / 1;
+  max-width: 530px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Background Subtle Celestial Orbit Rings */
-.hero-orbit-svg {
+/* Subtle Ambient Glow behind image */
+.hero-ambient-glow {
   position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
+  top: 10%;
+  left: 5%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(200, 249, 54, 0.14) 0%, rgba(200, 249, 54, 0.03) 50%, transparent 75%);
+  filter: blur(40px);
   pointer-events: none;
   z-index: 0;
 }
 
-.arc-orbit-line {
-  stroke: rgba(255, 255, 255, 0.04);
-  stroke-dasharray: 2 6;
-  fill: none;
-}
-
 /* Clean Cinematic Campus Photograph Frame */
 .hero-photo-frame {
-  position: absolute;
-  width: 78%;
-  height: 78%;
-  border-radius: 12px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1024 / 859;
+  border-radius: 14px;
   overflow: hidden;
   z-index: 1;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background: var(--bg-surface);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75);
-  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.85),
+              0 0 35px -12px rgba(200, 249, 54, 0.12);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
 .hero-photo-frame:hover {
-  transform: scale(1.012);
-  border-color: rgba(200, 249, 54, 0.2);
+  transform: translateY(-4px) scale(1.008);
+  border-color: rgba(200, 249, 54, 0.28);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9),
+              0 0 45px -10px rgba(200, 249, 54, 0.2);
 }
 
 .hero-photo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.1) brightness(0.92);
+  display: block;
+  /* Preserve the vibrant lime arc and deep architectural shadows */
+  filter: contrast(1.04) brightness(1.0);
   transition: filter var(--transition-smooth);
 }
 
 .hero-photo-frame:hover .hero-photo-img {
-  filter: grayscale(50%) contrast(1.08) brightness(0.95);
+  filter: contrast(1.07) brightness(1.02);
 }
 
-/* Subtle Edge Vignette (Non-obscuring dark edge gradient) */
+/* Subtle Edge Vignette (Soft edge blending into dark page background) */
 .hero-photo-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(8, 9, 11, 0.55) 100%),
-              linear-gradient(to top, rgba(8, 9, 11, 0.35) 0%, transparent 35%);
+  background: radial-gradient(ellipse at center, transparent 72%, rgba(6, 7, 9, 0.35) 100%),
+              linear-gradient(to top, rgba(6, 7, 9, 0.35) 0%, transparent 22%);
   pointer-events: none;
-}
-
-/* Refined Geometric Framing Lime Arc */
-.hero-arc-overlay {
-  position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.arc-track-line {
-  stroke: rgba(255, 255, 255, 0.06);
-  fill: none;
-}
-
-.arc-gauge-lime {
-  stroke: var(--lime-accent);
-  fill: none;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 6px rgba(200, 249, 54, 0.4));
-}
-
-.arc-sparkle {
-  fill: var(--lime-accent);
-  filter: drop-shadow(0 0 5px rgba(200, 249, 54, 0.5));
 }
 
 /* Refined Editorial Vertical Micro-text */

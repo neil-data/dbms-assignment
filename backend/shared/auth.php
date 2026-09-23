@@ -17,7 +17,16 @@ function initSession(): void {
         // Set secure session parameters
         ini_set('session.use_only_cookies', '1');
         ini_set('session.use_strict_mode', '1');
-        
+        if (PHP_VERSION_ID >= 70300) {
+            session_set_cookie_params([
+                'lifetime' => 0,
+                'path'     => '/',
+                'domain'   => '',
+                'secure'   => false,
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]);
+        }
         session_start();
     }
 }

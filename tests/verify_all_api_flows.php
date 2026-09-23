@@ -47,20 +47,24 @@ function apiReq(string $method, string $path, $body = null, ?string $cookieKey =
     }
 
     $json = json_decode((string)$rawBody, true);
-    return ['status' => $status, 'body' => $json, 'raw' => $rawBody, 'headers' => $headerStr];
+    $lastRes = ['status' => $status, 'body' => $json, 'raw' => $rawBody, 'headers' => $headerStr];
+    return $lastRes;
 }
 
 $testsRun = 0;
 $testsPassed = 0;
 
-function assertFlow(string $name, bool $condition, string $detail = '') {
-    global $testsRun, $testsPassed;
+function assertFlow(string $name, bool $condition, ?array $res = null) {
+    global $testsRun, $testsPassed, $lastRes;
     $testsRun++;
     if ($condition) {
         $testsPassed++;
         echo " [PASS] $name\n";
     } else {
-        echo " [FAIL] $name: $detail\n";
+        $r = $res ?? $lastRes ?? [];
+        $status = $r['status'] ?? 'unknown';
+        $raw = substr($r['raw'] ?? '', 0, 120);
+        echo " [FAIL] $name: Status $status | $raw\n";
     }
 }
 

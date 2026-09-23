@@ -8,7 +8,13 @@ declare(strict_types=1);
 
 // Set CORS headers for API requests
 if (!headers_sent()) {
-    header('Access-Control-Allow-Origin: *');
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    if (!empty($origin)) {
+        header("Access-Control-Allow-Origin: {$origin}");
+        header('Access-Control-Allow-Credentials: true');
+    } else {
+        header('Access-Control-Allow-Origin: *');
+    }
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 }
@@ -47,6 +53,10 @@ function sendJsonResponse(bool $success, string $message, $data = null, int $sta
         if ($data !== null) {
             $response['data'] = $data;
         }
+    }
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_write_close();
     }
 
     echo json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
