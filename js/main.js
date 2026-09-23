@@ -334,11 +334,25 @@ export async function openTicketModal(registrationId) {
 }
 
 /**
+ * Safe document ready utility for ES modules
+ */
+export function onReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    // DOM is already parsed in deferred ES modules
+    fn();
+  }
+}
+
+/**
  * Global App Initialization
  */
-document.addEventListener('DOMContentLoaded', () => {
+function initGlobal() {
   setupHeaderScroll();
   setupMobileNav();
   updateHeaderSessionUI();
   initAnimations();
-});
+}
+
+onReady(initGlobal);

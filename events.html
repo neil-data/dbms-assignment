@@ -174,9 +174,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initEventsPage } from './js/events.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initEventsPage();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initEventsPage);
   </script>
 </body>
 </html>

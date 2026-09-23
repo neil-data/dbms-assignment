@@ -9,9 +9,9 @@ declare(strict_types=1);
 class Database {
     private static ?PDO $instance = null;
 
-    // Default configuration for standard local XAMPP / Apache / MySQL environments
-    private const DB_HOST = 'localhost';
-    private const DB_PORT = '3306';
+    // Default configuration for local MySQL server on port 3307 or 3306
+    private const DB_HOST = '127.0.0.1';
+    private const DB_PORT = '3307';
     private const DB_NAME = 'cems_db';
     private const DB_USER = 'root';
     private const DB_PASS = '';

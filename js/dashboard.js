@@ -982,11 +982,17 @@ export async function initAdminConsole() {
 }
 
 // Auto Initialize
-document.addEventListener('DOMContentLoaded', () => {
+function autoInitDashboard() {
   if (document.getElementById('student-dashboard-content')) {
     initStudentDashboard();
   }
   if (document.getElementById('admin-console-content')) {
     initAdminConsole();
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', autoInitDashboard);
+} else {
+  autoInitDashboard();
+}

@@ -134,9 +134,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initClubDiscovery } from './js/clubs.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initClubDiscovery();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initClubDiscovery);
   </script>
 </body>
 </html>

@@ -95,9 +95,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initClubDetails } from './js/clubs.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initClubDetails();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initClubDetails);
   </script>
 </body>
 </html>

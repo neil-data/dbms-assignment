@@ -92,9 +92,9 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { api } from './js/api.js';
-    import { escapeHtml, showToast } from './js/main.js';
+    import { escapeHtml, showToast, onReady } from './js/main.js';
 
-    document.addEventListener('DOMContentLoaded', async () => {
+    onReady(async () => {
       const container = document.getElementById('profile-container');
       if (!container) return;
 

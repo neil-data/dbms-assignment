@@ -95,9 +95,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initEventDetails } from './js/events.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initEventDetails();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initEventDetails);
   </script>
 </body>
 </html>

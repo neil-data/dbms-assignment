@@ -174,8 +174,14 @@ export function initAuthPage() {
 }
 
 // Auto Initialize
-document.addEventListener('DOMContentLoaded', () => {
+function autoInitAuth() {
   if (document.getElementById('cems-login-form') || document.getElementById('cems-register-form')) {
     initAuthPage();
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', autoInitAuth);
+} else {
+  autoInitAuth();
+}

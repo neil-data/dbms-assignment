@@ -366,9 +366,9 @@
   <script type="module">
     import { initFeaturedClubs } from './js/clubs.js';
     import { api } from './js/api.js';
-    import { escapeHtml } from './js/main.js';
+    import { escapeHtml, onReady } from './js/main.js';
 
-    document.addEventListener('DOMContentLoaded', () => {
+    onReady(() => {
       initFeaturedClubs();
 
       // Load 3 Upcoming events for homepage

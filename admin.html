@@ -89,9 +89,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initAdminDashboard } from './js/dashboard.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initAdminDashboard();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initAdminDashboard);
   </script>
 </body>
 </html>

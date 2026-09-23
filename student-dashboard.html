@@ -92,9 +92,8 @@
   <script type="module" src="js/main.js"></script>
   <script type="module">
     import { initStudentDashboard } from './js/dashboard.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initStudentDashboard();
-    });
+    import { onReady } from './js/main.js';
+    onReady(initStudentDashboard);
   </script>
 </body>
 </html>
